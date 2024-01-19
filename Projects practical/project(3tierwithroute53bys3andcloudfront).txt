@@ -1,0 +1,62 @@
+1. we need 1 vpc with 6 subnet(2public & 4 private) in diffrent avaibility zones
+   --> 10.0.1.0/24 (1a) -> public subnet 1
+   --> 10.0.2.0/24 (1b) -> public subnet 2
+   --> 10.0.3.0/24 (1a) -> private subnet 1 web
+   --> 10.0.4.0/24 (1b) -> private subnet 2 web
+   --> 10.0.5.0/24 (1a) -> private subnet 1 app
+   --> 10.0.6.0/24 (1b) -> private subnet 2 app
+
+2. 1 internet gateway --> attach with vpc
+
+3. create route table --> public route table -> ig + both public subnet associate
+                      --> private route table -> all 04 private subnet associate
+
+4. create nat gateway (with public)--> edite route with private route table
+
+5. create ec2 instance as a basian host with public subnet 1
+
+6. Note- in security group port --> 22, 80, 8080, 3306 (use this security group for all place in this project)
+    and also use same vpc 
+
+7. create 2 ec2 instance with private subnet 01 as a web-server01 and private subnet 02 as a web-server02 with 
+    nginx script (install nginx only)
+
+8. create load balancer as a internet facing with public subnet 1 & 2 
+     --> assosiate with target group -> with ec2 web-server01 & web-server02
+
+9. create s3 bucket with domain name and upload template with changes in index.html in join put
+   internet load balancer dns. 
+    --> start with href --> http://internetlbdns      # In web development, "href" stands for "Hypertext Reference." It's an attribute commonly used in HTML to specify the destination or target of a hyperlink.
+
+10. create cloudfront with s3
+
+11. create route53 and create record with s3 bucket
+
+12. create 2 ec2 instance with private subnet 01app as a tomcat-app-01 & private subnet 02app as a
+     tomcat-app-02
+  
+13. create a internal facing load balancer with private subnet 01-web & private subnet 02-web
+     --> assosiate with target group --> with tomcat-app-01 & tomcat-app-02 ec2 instance
+
+14. take ssh web-server01 from basian-server and change in /etc/nginx/nginx.conf
+     
+       replace with in line number 38 to 44 ---> 
+            
+       server {
+        listen       80;
+        listen       [::]:80;
+        server_name  _;
+        location / {
+        proxy_pass http://internal-app-lb-686585353.us-east-1.elb.amazonaws.com/student/;
+        }  
+        
+       (Note - http://internal-app-lb-686585353.us-east-1.elb.amazonaws.com is my internal load balancer dns)
+     --> also same process with web-server02
+
+15. create rds with same pvc and security group.
+
+16. take ssh tomcat-app-01 and install mysql then configure databse and table and table also change in conf file context.xml with user name password, endpoint and database.
+
+17. then dow connector.jar in lib then stop catalina.sh and again start.
+
+18. hit domain you can see your page and click on join you can put your data. 

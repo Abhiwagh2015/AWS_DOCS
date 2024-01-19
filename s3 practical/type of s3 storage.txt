@@ -1,0 +1,32 @@
+S3-Service…..
+
+
+Type of aws storage…
+
+Amazon Web Services (AWS) offers several storage services to meet a variety of needs. Here are some of the main AWS storage services:
+
+1.	Amazon S3 (Simple Storage Service): This is a scalable object storage service that provides developers and IT teams with secure, durable, and highly available storage. 
+        It is designed to store and retrieve any amount of data from anywhere on the internet.
+
+2.	Amazon EBS (Elastic Block Store): This is a block-level storage service designed for use with EC2 instances. It provides persistent block-level storage volumes for use 
+        with Amazon EC2 instances in the AWS Cloud.
+
+3.	Amazon EFS (Elastic File System): This is a scalable file storage service designed for use with EC2 instances. It provides a simple, scalable, and fully managed file system 
+        for use with Amazon EC2 instances in the AWS Cloud.
+
+4.	Amazon Glacier: This is a low-cost, secure, and durable storage service for data archiving and long-term backup. It is designed to store infrequently accessed data and 
+        provides retrieval times ranging from minutes to hours.
+
+5.	AWS Storage Gateway: This is a hybrid storage service that enables on-premises applications to seamlessly use AWS storage services. It provides a virtual appliance that 
+        can be deployed on-premises or in a virtual private cloud to connect to AWS storage services.
+
+
+6.	Amazon FSx (File System): This is a fully managed file system service that provides shared file storage for use with Windows and Linux workloads. It supports industry-standard 
+        file protocols and can be integrated with other AWS services like Amazon S3.
+
+
+7.	Amazon S3 Glacier: This is a low-cost storage service designed for long-term data archival. It is optimized for data that is rarely accessed and provides retrieval times ranging 
+        from minutes to hours.
+
+These AWS storage services can be used individually or in combination to meet a variety of storage needs, from simple file storage to more complex storage requirements for data archiving 
+and backup.

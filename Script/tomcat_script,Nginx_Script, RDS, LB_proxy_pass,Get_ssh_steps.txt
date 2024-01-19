@@ -1,0 +1,97 @@
+1)
+#!/bin/bash
+sudo yum update -y
+sudo yum install java-openjdk -y
+cd /mnt
+sudo wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.84/bin/apache-tomcat-8.5.84.zip
+sudo unzip apache-tomcat-8.5.84.zip
+cd ./apache-tomcat-8.5.84/
+sudo chmod +x ./bin/*
+cd ./bina
+echo $pwd
+sudo ./catalina.sh start
+sudo wget https://s3-us-west-2.amazonaws.com/studentapi-cit/student.war
+sudo mv student.war  /mnt/apache-tomcat-8.5.84/webapps/
+
+------------------------------------------------------------------------------------------
+2)  Nginx Script
+#!/bin/bash
+sudo amazon-linux-extras install nginx1 -y
+sudo systemctl start nginx
+sudo systemctl enable nginx
+-------------------------------------------------------------------------------------------
+2)
+##Nginx as a load balancer proxy_pass script##
+events {
+        worker_connections 768;
+}
+
+http {
+        upstream myapp
+        {
+                server 10.0.3.79:80;
+                server 10.0.2.151:80;
+        }
+
+        #These are my settings SHROBON
+        server {
+                listen 80;
+                location / {
+                        proxy_pass http://myapp;
+                }
+        }
+}
+-------------------------------------------------------------------------------------------
+3) ## RDS create table Script ##
+
+CREATE TABLE if not exists students(student_id INT NOT NULL AUTO_INCREMENT,
+	student_name VARCHAR(100) NOT NULL,
+    student_addr VARCHAR(100) NOT NULL,
+	student_age VARCHAR(3) NOT NULL,
+	student_qual VARCHAR(20) NOT NULL,
+	student_percent VARCHAR(10) NOT NULL,
+	student_year_passed VARCHAR(10) NOT NULL,
+	PRIMARY KEY (student_id)
+);
+
+******************************************************************************************
+4) Tomcat Installation command
+
+sudo wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.84/bin/apache-tomcat-8.5.84.zip
+sudo unzip apache-tomcat-8.5.84.zip
+cd ./apache-tomcat-8.5.84/
+
+Student registration page in RDS
+
+sudo wget https://s3-us-west-2.amazonaws.com/studentapi-cit/student.war
+sudo mv student.war /mnt/apache-tomcat-8.5.84/webapps/
+
+
+******************************************************************************************
+
+5) vim context.xml
+			<Resource name="jdbc/TestDB" auth="Container" type="javax.sql.DataSource"
+               maxTotal="100" maxIdle="30" maxWaitMillis="10000"
+               username="USERNAME" password="PASSWORD" driverClassName="com.mysql.jdbc.Driver"
+               url="jdbc:mysql://DB-ENDPOINT:3306/DATABASE"/>
+
+
+*******************************************************************************************
+6)
+   #mysqldump -h database-1.cpio2plcbiwx.us-east-1.rds.amazonaws.com -u admin -p --databases studentapp > studetapp_backup.sql
+ 
+   #mysqldump -h database-1.cpio2plcbiwx.us-east-1.rds.amazonaws.com -u admin -p --databases studentapp --routines --no-data > studetapp_backup_nodata.sql
+ 
+ #mysqldump -h database-1.cpio2plcbiwx.us-east-1.rds.amazonaws.com -u admin -p --databases studentapp --no-create-info --skip-triggers > studetapp_backup_noschema.sql
+
+-------------------------------------------------------------------------------------------- 
+7) Get SSh Steps From Open Command Prompt
+Private key copy in server side use of Command Prompt
+#dir              :- type dir because of you private key stored in Download directory
+#cd Download      :- Show your private Instance private Key
+#scp -i *public_key* *private_key* ec2-user@public instance IP:/tmp  
+#ssh -i public key ec2-user@public instance IP
+#cd tmp
+#sudo chmod 777 private_key
+#sudo ssh -i private_key ec2-user@private instance IP
+ 

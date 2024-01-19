@@ -1,0 +1,46 @@
+Note:-  This practical is based on suppose upload delete getdata putdata any objects are perform in this bucket so create logs using cloudtrail then stored logs in cloudwatch 
+        group as well as automaticaly created bucket...
+
+1.sear     ch new service "CloudTrail"
+
+2.click on create trail 
+
+3.type Trail name Ex. s3-bucket-events  then click on create trail
+
+4.Storage location
+  you have two options create new s3 bucket this bucket is auto randomaly create #this bucket stored logs access your bucket
+  or
+  you have exist bucket to choose it
+
+5. below both options are enable defaultly
+  Log fill SSE-KMS encryption disable mean (untick)
+  log file validation enable
+
+6.CloudWatch Logs - optional (tick) enable
+
+7.Role name
+   type role name Ex.cloudtrail-role then NEXT
+
+8.Event type 
+   choose data events
+
+9. click to "switch to basic event selector"   #this mean I have perticuler bucket create trail
+
+10. Data event source
+    All current and future S3 buckets   read write (untick)
+ 
+11. Individual bucket selection 
+    click on Browse select s3 bucket 
+
+Next then Create trail
+
+******************************************************
+
+Output 
+Goto Source bucket
+   then put the objects
+
+Then Go to destination bucket default created the click and show two folder like CloudTrail-Digest and cloudTrail but you click cloudTrail folder 
+click folder to folder show currunt trail select the currunt logs and select and click open
+
+next Goto Cloudwatch and select log group you created group show the massage of currunt logs

@@ -1,0 +1,66 @@
+Note:  create environment for student.war application deploy on using Elastic Beanstalk service follow below steps
+
+create a role ec2fullaccess or adminaccess
+
+1. Serach a Service "Elastic Beanstalk"
+
+2.Easily deploy your web application in minutes.
+  click on Create application
+
+3.type Application Name Ex. student apps
+
+4.Choose a Platform Ex. Tomcat
+
+5.Choose a Platform Branch "Tomcat 8.5 with Corretto 11 running on 64bit Amazon Linux 2"   #because of support version 8 or 9
+
+6.Click on upload your code 
+   type version Ex. 1
+   click on local or public s3 URL
+             select localy student.war file #this is your application to deploy
+
+7.Click on Next
+
+8.Service access for service role
+  create new service role or use existing role whatever
+  role is automatically update "aws-elasticbeanstalk-service-role"
+
+9.select EC2 key pair existing
+
+10.EC2 instance profile  choose you create custome role  then click on Next
+
+11.select default or custome vpc
+
+12.Public IP address  click on "Activated"
+
+13.Instance subnets select all availability zones  click on Next
+
+15.Root volume (boot device) default or your choice as well
+
+16.EC2 security groups select SG default or existing you created
+
+17.AMI ID default or you have been paste it click on Next
+
+18.Monitoring  click on system  "basic"
+
+19.Managed platform updates managed update deactivated so untick activated
+
+20. Email Notifications create SNS topic this is preferable 
+
+21.Platform software choose proxy server "Nginx"
+
+22. click on Next show review then submit it
+
+23.show Events its important read it create infra environment for student.war application
+
+24.click on Elastic Beanstalk Domain  show Health is green
+
+25. hit DNS on browser your application show registration page
+     or
+    created ec2 instance copy public IP with port 8080  show your  registration page
+     or
+    automaticaly attach this apps Elastic IP with port 8080  show your  registration page
+    This logs are stored in Elastic Beanstalk Bucket
+
+26.suppose terminate create a environment click on environment Goto Actions click on Terminate environment so quikly delete all resources.
+   then type environment name then submit 
+

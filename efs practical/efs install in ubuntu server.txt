@@ -1,0 +1,37 @@
+create 2 instance
+
+goto instance
+sudo -i
+apt update
+goto chrome "install efs on ubuntu server"
+sudo apt-get -y install git binutils
+git clone https://github.com/aws/efs-utils
+cd efs-utils
+./build-deb.sh
+sudo apt-get -y install ./build/amazon-efs-utils*deb
+dpkg -l | grep amazon-efs-utils    #efs version
+mkdir /efs
+
+Goto efs service
+create efs  then view efs
+goto network select your security group {22, nfs(2049), tcp(8080)}
+click on attach 
+  Mount via DNS then copy links paste both of instaces on /efs folder
+  sudo mount -t efs -o tls fs-0c6cd8312f109409c:/ /efs
+  sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-0c6cd8312f109409c.efs.us-west-2.amazonaws.com:/ /efs
+  dpkg -l | grep amazon-efs-utils   #efs version
+  df -Th
+  lsblk
+  touch file {1..5}  this is show both of instancess
+
+cd /efs 
+download tomcat apps server
+apt install default-jdk   #download new java version both of instances
+java --version
+cd /efs/apache-tomcat-9.0.78/webapps
+https://tomcat-project.s3.amazonaws.com/student.war 
+
+goto ip:8080/student
+
+*********************************************************************************
+

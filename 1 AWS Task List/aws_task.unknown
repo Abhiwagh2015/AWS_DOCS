@@ -1,0 +1,30 @@
+TASKS OF AWS
+
+
+
+	•	Create user & give password
+	•	Create bucket, add 2 users, give one user permission of read and write, give other user permission or read only.
+	•	Create S3 bucket and cross region replication
+	•	Create S3 bucket and apply cross account replication
+	•	Host a static webpage of S3 bucket and enable server access logs.
+	•	Host webpage using httpd.
+	•	To create AMI by template
+	•	In 1 load balancer add 2 listeners and use weighted policy instead of round robin algorithm as 70:30 traffic flow
+	•	Use nginx as a load balancer
+	•	Create network load balancer
+	•	Blue green deployment model
+	•	Create load balancer with autoscaling using template
+	•	Create load balancer with autoscaling using AMI
+	•	Create load balancer and add listeners 10,20,30,40
+	•	Create autoscaling with warm up time 600
+	•	Create LAMP server (Apache)
+	•	Create LANP server (Nginx)
+	•	Mount s3 bucket on EC2
+	•	Server migration from on-premises to cloud
+	•	Cross-region Load balancer
+	•	Cross-region VPC
+	•	Peer 3 or more VPC’s
+	•	Generate logs of load-balancer
+	•	Suppose you are using ec2 instance & you lost key, then how you will recover lost key?
+	•	Host static website using services like php, python, node js, word press
+	•	Command to update only security patch on amazon linux machine

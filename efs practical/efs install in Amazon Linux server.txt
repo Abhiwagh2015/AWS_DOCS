@@ -1,0 +1,83 @@
+  Note:  This is efs service only one region with vpc specific
+
+*****************************************************************************************************
+create 2 server with amazon linux in one or other subnet but create subnet in vpc  
+create security group my-SG with ports (22,2049,8080)
+
+*****************************************************************************************************
+
+suppose your machine image is Amazon Linux so we are use following commands
+search on web 'install efs on linux'
+click on 'Manually installing the Amazon EFS client'
+click on Distribution 'To build and install amazon-efs-utils as an RPM package for Amazon Linux, Amazon Linux 2, and Linux distributions other than OpenSUSE or SLES'
+
+*****************************************************************************************************
+
+run following command on terminal linux terminal on both of servers
+
+vim script.sh
+chmod +x script.sh
+./script.sh
+
+yum update
+sudo yum -y install git
+git clone https://github.com/aws/efs-utils
+cd efs-utils/
+ls
+sudo yum -y install make
+sudo yum -y install rpm-build
+sudo make rpm
+ls
+sudo yum -y install ./build/amazon-efs-utils*rpm
+rpm -qa | grep amazon-efs-utils  #show version
+        amazon-efs-utils-1.35.0-1.amzn2023.noarch
+yum info amazon-efs-utils
+     Last metadata expiration check: 0:35:08 ago on Wed Dec  6 12:49:38 2023.
+     Installed Packages
+     Name         : amazon-efs-utils
+     Version      : 1.35.0
+     Release      : 1.amzn2023
+     Architecture : noarch
+     Size         : 225 k
+     Source       : amazon-efs-utils-1.35.0-1.amzn2023.src.rpm
+     Repository   : @System
+     From repo    : @commandline
+
+*****************************************************************************************************
+
+goto efs service create file system goto file system then goto network access click on managed select availability zone you create servers and change security group ex. my-SG
+
+*****************************************************************************************************
+
+suppose this error show in terminal so follow above command
+
+sudo mount -t efs -o tls fs-0fafc2b016f27d184:/ /efs
+Failed to resolve "fs-0fafc2b016f27d184.efs.us-east-1.amazonaws.com" - check that your file system ID is correct, and ensure that the VPC has an EFS mount target for this file system ID.
+See https://docs.aws.amazon.com/console/efs/mount-dns-name for more detail.
+Attempting to lookup mount target ip address using botocore. Failed to import necessary dependency botocore, please install botocore first.
+
+sudo yum install python3-pip
+sudo pip install botocore
+aws configure  #set secret and access key with region 
+
+sudo mount -t efs -o tls fs-0fafc2b016f27d184:/ /efs     #repeat this command 
+df -Th    #show efs mount how many data  is stored in efs folder  
+
+*****************************************************************************************************
+
+cd /efs
+mkdir sagar   #show folder in another server
+
+install tomcat in /efs folder but tomcat prequistics install java both of servers
+sudo yum install java-1.8.0-amazon-corretto-devel  or yum install java-openjdk -y or yum install java* -y
+
+this command only stored in one server but only start catalina
+wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.83/bin/apache-tomcat-9.0.83.tar.gz
+tar -xvf apache-tomcat-9.0.83.tar.gz
+chmod +x bin/*
+
+*****************************************************************************************************
+
+Note:
+bootstrap.jar is a component used in the Java Virtual Machine (JVM) during the process of launching Java applications. When you run a Java application, 
+the JVM needs to go through a bootstrap process to set up the runtime environment, load necessary classes, and initialize various components.

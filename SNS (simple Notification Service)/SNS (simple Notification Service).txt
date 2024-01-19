@@ -1,0 +1,11 @@
+SNS  push base (mechanism)  service
+
+step 1. Search simple Notification Service "SNS" Service
+       click "create topic"
+       select type "Standard"
+       type Topic name Ex. "my-topic"
+       Display name Ex. "my-Training" click "create topic"
+       click "Create Subscription"
+       protocol select "Email"
+       Endpoint type your email "sagar.sonule001@gmail.com"  click "Create Subscription"
+       GoTo email account and click "confirm subscription" 

@@ -1,0 +1,74 @@
+1. create a EC2 instance with port 22 80 and 443 
+
+2. Deploy the LAMP Stack with php
+
+   a. amazon-linux-extras install nginx1 -y
+   b. systemctl start nginx
+   c. systemctl enable nginx
+
+3. install mariadb 
+
+   a. yum install mariadb-server
+   b. systemctl start mariadb
+   c. mysql_secure_installation   set password
+   d. systemctl enable mariadb.service
+
+4. insatll php server
+   
+   a. amazon-linux-extras install php7.3
+   b. vim /usr/share/nginx/html/sagar.php     sagar.php is a file with extention of php
+   c. paste following data
+
+     <?php
+     phpinfo();
+     ?>
+
+5. hit the public ip of instance nginx page open /sagar.php then php page open
+
+
+6. install wordpress application
+
+   a. mysql -u root -p
+   b. CREATE DATABASE mydatabase;
+   c. CREATE USER sagar@localhost IDENTIFIED BY 'admin123';
+   d. GRANT ALL PRIVILEGES ON mydatabase.* TO sagar@localhost IDENTIFIED BY 'admin123';
+   e. FLUSH PRIVILEGES
+   f. exit
+
+   1. cd /usr/share/nginx/html
+   2. wget https://wordpress.org/latest.tar.gz
+   3. tar xzvf latest.tar.gz
+   4. chown -R nginx:nginx /usr/share/nginx/html/wordpress
+   4. chown -R nginx:nginx /usr/share/nginx/html/wordpress/*
+   5. cd wordpress/
+   6. cp wp-config-sample.php wp-config.php
+   7. vim wp-config.php => change the value of the DB_NAME, DB_USER, and DB_PASSWORD to connect the database with your WP application.
+   8. Run on chrome, “http://yourIPaddressofInstance/wordpress/” => we will see wordpress installation setup page
+   9. Set basic information, then you will be successfully installed the wordpress application.
+   10. Need to login into your wordpress account.
+
+================================
+
+To make your wordpress application secure
+
+1) Create hosted zone on route 53 with our domain and Change NS on freenom.
+
+2) Issue ACM certificate and create route53 record on it.
+
+3) create Load balancer and select our Instance in target group with all respective VPC and subnet.
+
+4) Add listerner on target group with 443 port.
+
+5) Attach certificate on 443 port and forward to target group.
+
+6) forward listener port 80 to 443 port.
+
+7)Edit on 80 listener port, redirect to https:443 and use custom host path query. 
+
+ Host= domain name
+ path=/wordpress/
+
+ ,save changes
+
+8)Hit domain name, it will show our wordpress page. Now you willl be able to publish your blog and share with your friends.
+

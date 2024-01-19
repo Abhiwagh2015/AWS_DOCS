@@ -1,0 +1,23 @@
+1. Create 2 private 2 public subnet and instead of using NAT gateway use NAT instance, and implement NLB in that Enable Proxy Protocol also Configure Session Affinity and Enable Connection Idle Timeout and Implement Target Group Stickiness 
+
+2. Create 2 private 2 public subnet and instead of using NAT gateway use NAT instance, and implement NLB in that Enable Proxy Protocol and Implement Target Group Stickiness 
+
+3. Enable ALB logs and store in S3 Bucket
+
+4. Enable AS with warmup time and dynamic scaling policy and implement ins on it 
+
+5. Implement Cross-Account NLB and enable access logs and store logs in s3 in account A
+
+6. Configure event notifications on your S3 buckets to trigger actions when specific events occur, such as object creation, deletion, or restoration. Set up cross-account access to allow other AWS accounts or IAM users to access your S3 buckets
+
+7. Create a mechanism to get the CPU utilisation and Free Memory of system on email. I should get alert every hour
+
+8. Copy EBS snapshots to different regions for cross-region disaster recovery and data migration. This helps protect your data and provides geographical redundancy.
+
+9. Enable CloudFront Access Logs and in origin use loadbalancer and also Implement Geo-Restrictions and also implement ssl using ACM 
+
+10. Set Up CloudFront Real-Time Logs and use s3 as origin , and Use signed URLs and cookies to control access to your content and grant temporary permissions for specific users or time periods.
+
+11. I want to access my s3 bucket form ec2 instance which is not associated with nor NAT or IGW 
+
+12. Create a mechanism  if my ec2 instance’s CPU or disk usage is 90% or above I should get the notification on email.

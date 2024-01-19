@@ -1,0 +1,22 @@
+Apply MFA to a single bucket or how to enabled MFA to the s3 bucket ?
+
+Ans:- steps first activate the MFA to the root user go to IAM MFA activate then 
+Go to the s3 service ---- go to the bucket click on bucket and see the properties MFA is disabled 
+Go to the CLI aws --- to the command prompt 
+	aws configure
+aws s3api list-buckets -- this is command 
+	aws s3api put-bucket-versioning --bucket resident-evil1 --versioning-configuration Status=Enabled,MFADelete=Enabled --mfa "arn:aws:iam::065068297386:mfa/root-account-mfa-device 859871"
+				****note
+this is enable MFA command****** resident-evil1 is my bucket name 065068297386 this is my root id 
+	then you try to bucket delete or not if you delete then show versioning then now to try delete then you have a error to the MFA
+	aws s3api delete-object --bucket resident-evil1 --key newfile.txt   ---- this is for command line 
+****note 
+resident-evil1 this is my bucket name newfile.txt is my file name 
+aws s3api delete-object --bucket resident-evil1 --key newfile.txt --version-id Eqv102ILFiiBJPL2kCWVUBOXPSw
+note ********
+Eqv102ILFiiBJPL2kCWVUBOXPSw this is my verison id   (now try to delete version id file it required MFA)
+>aws s3api put-bucket-versioning --bucket resident-evil1 --versioning-configuration Status=Enabled,MFADelete=Disabled --mfa "arn:aws:iam::065068297386:mfa/root-account-mfa-device 859871"
+		*******note this is disable MFA to the s3 *******
+note:- it is very in-secure method because your "access key" & "secreate key" store on locally. 
+anyone can access your laptop can access your aws keys.
+Versioning must be enabled on bucket.	

@@ -1,0 +1,9 @@
+1. host a static hello world website using nginx, httpd in amazon linux and in Ubuntu machine.
+2. Schedule a task to run only on weekdays:at 9:00 AM from Monday to Friday.
+3. Schedule a task to run on specific days of the month:on the 1st and 15th day of each month at 10:00 AM.
+4. Run multiple commands in a single crontab entry
+5. Schedule a task to run on 2nd and 4th Saturday at 5:45 AM 
+6. Create a Zip Archive: Create a basic zip archive of a directory /var and   Extract a Zip Archive: Extract the contents of a zip archive
+7. Create a Password-Protected Zip Archive: Create a password-protected zip archive 
+8. Extract a Password-Protected Zip Archive: Extract the contents of a password-protected zip archive
+9. Create a Tar Archive and Exclude Files: Create a tar archive while excluding specific files

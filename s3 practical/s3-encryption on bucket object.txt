@@ -1,0 +1,53 @@
+this practical is on without encyption does not put the objects on your bucket
+(this bucket suppose access any other users)
+
+step 1. create unique bucket with enable ACL,unmark Block all public access
+        Defaults encryption in select AWS Key Management Service key (SSE-KMS)
+        click on create a KMS key automatic Goto KMS console service
+
+step 2. select key type default "symmentric"
+        select key usage Encypt and decrypt
+        Next
+        set Alias Ex. "Encryption-alias"
+        Next 
+        Key-Administrator select users for access
+        key users select users for use key
+        finish
+        click on key copy ARN and 
+
+step3. Goto S3 
+       paste key ARN  on s3 in AWS KMS key ARN 
+       create bucket
+       select bucket goto permission and Edit bucket policy
+       click on policy generator and show new console
+      
+       select type of policy: s3 bucket policy
+       Effect : select Deny
+       Principal :  *  (* show whole)
+       Actions : select PutObjects
+       ARN : paste in box bucket ARN
+    
+  click on Add Condition
+      condition: select StringNotEquals
+      key: select s3:x-amz-server-side-encryption
+      value : Ex. aws:kms (type)
+      click on Add condition
+      click on Add Statement
+      show you create policy & click on Generate policy
+      copy this policy
+
+step4. Paste on s3 Edit policy & add this resources in "/*" because of apply on bucket put object
+
+       "Resource": "arn:aws:s3:::my-bucket19092/*",
+        click on save changes
+
+step5. Goto the bucket put the object upload failed massage show because of put object encryption is mendatory
+       Goto the bucket add file select object goto drag below and click on proprties
+       show up Server-side encryption 
+       click on "Specify an encryption key"
+       click on "Override bucket settings for default encryption"
+       click on "Choose from your AWS KMS keys" and select you set this "Encryption-alias" 
+       and upload is successful 
+
+
+Note :- without authorized server side encyption match for users for upload the data suppose encyption does not match that can be not upload the objects

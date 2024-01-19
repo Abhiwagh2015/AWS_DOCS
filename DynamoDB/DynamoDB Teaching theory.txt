@@ -1,0 +1,75 @@
+**************** Important & Teaching Related Theory For DynomoDB ***********************
+
+1. This is Unstructured Data (Does not define stuctured pattern)
+    (Ex. jahape like google.com or any other jahape bahot sare documentation pade huve hai bahot sara data hai, Ex. Heavy-Text)
+     agar apko koi line google pr search karni ho to jo apne type kiya uske alag alag word ko search krta hai jahape wo word ek
+     sath dikhte hai waha se data co collect karke proper tarike se uska texture apko present krta hai like ChatGPT)
+
+2.Explain Structured & unstructured Data.
+
+3.Explain DynamoDB contents 
+  a.Tables   
+    table aap jitane chahiye utane create kr sakte ho table ke andar multiple attribute ka schema hota hai iske andar multiple items ko collect kiya jata hai 
+  
+  b.Attributes 
+    ye table ke andar hame jaise chahe vaise format me create kr sakte hai like sr_no, name, surname, address, mb_no, age, etc aise ek create karne ke bad 
+    dusre bhi create kr sakte hai with items.
+
+  c.Items    
+    Items ye collection of data hota hai jaise apke pass student ka data hai first second third aur uski unstructure details usko ham item bolte hai aur uski 
+    size 1-400 KB (killo-byte) tak hoti hai usse jyda nahi, agar apke paas 400KB se jyada information hai to wo aap s3 bucket ke andar ek json extention format me
+    filled karke uska URL copy kr sakte hai apke table ke andar yahape limit nahi hai
+  
+  d.Key Value format Partion key (primary key) 
+    Agar apko koi table create karna hai to ek default item number ya usko primary key dena jaruri hota hai aur ye required hai yahi primary key jo 
+    Structured & unstructured Data ke andar simmiler hoti hai.)
+
+  e.composite key   
+    aap yahape ek primary key na dete huve ek se jyada de sakte hai usko hi ham composite key bolte hai like roll_no aur Enrollment_no.
+  
+  f.Import    
+    yahape aap koi data agar apke pass multiple Ex koi Product ki json(javascript object notation) extention me local disk me ya s3 bucket me stored hai aur wo apko 
+    cloud pr le aana hai to s3 bucket se ya ec2 instance ki help se DynamoDB table me collect kr sakte hai.
+
+  g.Export    
+    Aur DynamoDB table me ka data apko s3 bucket ke andar public domain ya private me stored karna hai to Export kar sakte hai. 
+   
+4.Koi data apko read krna hai ya write karna wo kis capacity unit me hona hai us catagary me dal skte hai ye table create karne ke time pe custome setting kar sakte hai
+  eske do type hote hai...
+  1. Read Capacity Unit
+  2. Write Capacity Unit
+  
+  1. Read Capacity Unit
+     Yahape data read kar sakte hai koi client agar data ko read karta hai to wo kis capacity unit ke andar ani chahiye Read Capacity Unit ke bhi 2 type hote hai...
+
+     a. Strongly Consistant Read Per Second
+        yahape hota ye hai agar koi client perticuler data point pr data read krta hai but wo data server pr availablity zones pr upload nahi huva hai but ho raha hai 
+        processing me hai, update ho raha hai huva nahi hai to jab tak process complate nahi hoti tab tak client ko thoda delay matlab kuch second ka wait karke updated 
+        data de dega lekin purana data serve nahi karega..(ye costly facility hai)
+             Yahape data RCU ki form ki unit me hota hai RCU mean Read Capacity Unit
+             Ex. 1 RCU ki cost agar 10 rs  hai matlab 1 RCU = 4 KB/ps (killo byte per second se agar koi data read karta hai to uska calculation aise hoga)
+                 agar 5 ya 6 ya 7 KB/ps read karta hai wo 2 RCU count karega 
+             Ex.RCU = 1000 (killo byte per second se agar koi data read karta hai)
+                      ------------------------------------------------------------
+                      4 KB/ps
+                    = 250 RCU (cost count hoga) 1 RCU ki cost $ me hoti hai iska prizing cost aws documentation me milega 
+
+     b. Eventually Consistant Read Per Second
+        Esame eska ulta hota tai agar apka data es capacity ke andar stored hai to ek perticuler data point ke andar jitna data updated hai utna serv kr dega time ya delay 
+        nahi karwayega (ye best service hai aur fastly process karta hai aur jyda client yahi prefered karte hai), note ye facility sirf read me hai write me nahi
+             Ex. 1 RCU ki cost agar 10 rs  hai matlab 1 RCU = 8 KB/ps (yahape 1 RCU ki cost strongaly se double hoti hai matlab 8KB/ps agar koi data read karta hai to uska calculation aise hoga)
+                 agar 10 ya 11 KB/ps read karta hai wo 2 RCU count karega  
+             Ex.RCU = 1000 (killo byte per second se agar koi data read karta hai)
+                      ------------------------------------------------------------
+                      8 KB/ps
+                    = 125 RCU (cost count hoga) 1 RCU ki cost $ me hoti hai iska prizing cost aws documentation me milega 
+ 
+   2. Write Capacity Unit
+      yahape simple calculation hai 1 write per second ki cost 1 WCU (write capacity unit).
+      1 KB write = 1 WCU
+      10 KB write = 10 WCU
+
+5.Note :-
+  1. aws apko 25 RCU free deta hai agar apne 50 RCU used kiya hai to -25 karke wo 25 RCU ka hi charge cost lega (Per month RCU cost hota hai).
+  2. 250 tables per region create kr sakte hai
+  3. table kitni bhi badi ho sakti hai but uske andar ke item ka size 1-400 KB ke upar nahi honi chahiye

@@ -1,0 +1,76 @@
+1. create ec2 instance following any type of OS with userdata and create role cloudwatchfullaccess and attach to instance
+
+Amazon Linux 2
+Amazon Linux AMI 2014.09.2 and later
+Red Hat Enterprise Linux 6.9 and 7.4
+SUSE Linux Enterprise Server 12
+Ubuntu Server 14.04 and 16.04
+
+#!/bin/bash
+sudo yum update -y
+sudo yum install httpd -y
+sudo systemctl start httpd
+sudo systemctl enable httpd
+sudo echo "hello world" > /var/www/html/index.html
+sudo systemctl restart httpd
+
+2.get the ssh then follow the command
+{
+Search on Browser "custom metrics memory disk in aws"
+Deprecated: Collect metrics using the CloudWatch monitoring scripts
+click on link https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-scripts-intro.html
+}
+
+Install required packages
+*****With some versions of Linux, you must install additional Perl modules before you can use the monitoring scripts.****
+
+0.1 sudo yum install -y perl-Switch perl-DateTime perl-Sys-Syslog perl-LWP-Protocol-https perl-Digest-SHA.x86_64
+
+0.2 perl --version
+         This is perl 5, version 16, subversion 3 (v5.16.3) built for x86_64-linux-thread-multi
+         (with 44 registered patches, see perl -V for more detail)
+0.3 Install monitoring scripts
+         The following steps show you how to download, uncompress, and configure the CloudWatch monitoring scripts on an EC2 Linux instance.
+    curl -O https://aws-cloudwatch.s3.amazonaws.com/downloads/CloudWatchMonitoringScripts-1.2.2.zip 
+    ls
+    unzip CloudWatchMonitoringScripts-1.2.2.zip
+    cd aws-scripts-mon
+         mon-get-instance-stats.pl   (get the monitoring from cloudwatch to ec2 instance)
+         mon-put-instance-data.pl    (put the monitoring from cloudwatch to ec2 instance)
+    
+    ./mon-get-instance-stats.pl  (type command get the data)
+
+             Instance i-0852edd12158264fd statistics for the last 1 hour.
+              CPU Utilization
+                 Average: 1.50%, Minimum: 0.16%, Maximum: 30.17%
+              Memory Utilization
+                 Average: N/A, Minimum: N/A, Maximum: N/A
+             Swap Utilization
+                 Average: N/A, Minimum: N/A, Maximum: N/A
+
+     ./mon-put-instance-data.pl --mem-util
+             Successfully reported metrics to CloudWatch. Reference Id: ca6c9f98-b5ed-4f35-8a42-5b56ab689918
+     ./mon-put-instance-data.pl --mem-used   (we can use)
+     ./mon-put-instance-data.pl --mem-avail  
+      ./mon-put-instance-data.pl --disk-space-util --disk-path=/root
+
+*********************************************************************************************************************************
+
+There are two type of aws cloudwatch namespaces
+
+suppose, directaly push the resourcess in cloudwatch without user put the data now we can sheduled in crontab
+
+crontab -e 
+              * * * * * /root/aws-scripts-mon/mon-put-instance-data.pl --mem-util --mem-used --disk-space-util --disk-path=/root
+
+systemctl restart crond
+
+Goto cloudwatch all matrix custom namespace
+
+
+
+
+
+
+
+

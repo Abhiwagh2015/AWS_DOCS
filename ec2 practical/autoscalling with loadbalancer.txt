@@ -1,0 +1,122 @@
+step 1. create 3 template with following script & stages for home,mobile,laptop
+
+Goto Ec2 service click on Launch Template
+type Template name Ex. home
+Auto scalling guidance is in click
+select OS image is Ex. amazon Linux (simple)
+Instance type select 
+key pair select
+Subnet don't select
+select existing security group to involve ports
+
+#!/bin/bash                                               #!/bin/bash                                                  #!/bin/bash
+sudo yum update -y                                        sudo yum update -y                                           sudo yum update -y
+sudo yum install httpd -y                                 sudo yum install httpd -y                                    sudo yum install httpd -y
+systemctl start httpd                                     systemctl start httpd                                        systemctl start httpd
+sudo mkdir -p /var/www/html/laptop                        sudo mkdir -p /var/www/html/mobile                           sudo echo "Hello Home World">/var/www/html/index.html
+sudo echo "Hello Laptop">/var/www/html/laptop/index.html  sudo echo "Hello Mobile">/var/www/html/mobile/index.html     systemctl restart httpd 
+systemctl restart httpd                                   systemctl restart httpd                                      systemctl enable httpd
+systemctl enable httpd                                    systemctl enable httpd                                            
+
+Note :- suppose, you have to create template so changes is required fields
+
+*************************************************************
+
+step 2. Create 3 Autoscalling Group Diffirent(home,mobile,laptop)
+Goto Auto Scalling Group
+Auto Scaling group name Ex. ASG-home
+select launch template home
+select your VPC
+Select all Availability Zones subnets
+next
+select No load balancer 
+next
+Desired capacity 3
+Minimum capacity 2
+Maximum capacity 4
+next
+Add notifications select topic for notification
+next 
+Add Tag Name Home-server etc.
+click on create Auto Scalling group
+
+**************************************************************
+
+step 3. create 3 Target Group for (home,mobile,laptop)
+---------------------------
+1st target group for home
+click on create target group
+type Target group name Ex. TG-home
+Health check path type /
+click on Advanced health check settings
+Success codes type 200-400
+next No select instances for registerdstep  (IMP)
+create target group
+----------------------------
+
+2st target group for laptop
+click on create target group
+type Target group name Ex. TG-laptop
+Health check path type /laptop/
+click on Advanced health check settings
+Success codes type 200-400
+next No select instances for registerd (IMP)
+create target group
+----------------------------
+
+1st target group for mobile
+click on create target group
+type Target group name Ex. TG-mobile
+Health check path type /mobile/
+click on Advanced health check settings
+Success codes type 200-400
+next No select instances for registerd  (IMP)
+create target group
+----------------------------
+
+*****************************************************************
+
+step 4. create Loadbalancer with add listener
+Goto loadbalancer
+select Application Load Balancer
+create
+Load balancer name Ex. auto-loadbalancer
+Schema select Internet facing loadbalancer
+Ip address IPv4
+Mapping (select all subnet required)
+select Security Group
+Listening and routing
+port 80     select :- TG-home
+click on create load balancer
+
+********************************************************************
+
+step 5. select loadbalancer for add remaining listener
+click on listener Goto Actions and select Manage Rules
+click on + sign
+-------------------------------------------------------
+click on Insert Rule
+Click on add condition select path 
+type path in /mobile/*   forword to TG select TG-mobile 
+save
+-----------------------------------------------------
+click on Insert Rule
+Click on add condition select path 
+type path in /laptop/*   forword to TG select TG-laptop 
+save
+refresh rule in back 
+and show loadbalancer 3 rule
+
+********************************************************************
+
+step 6. Goto the AutoScalling Group (same methods use mobile and laptop Autoscalling)
+
+select ASG-home then Goto the Details
+after that edit Loadbalancer click on application
+then select TG-home target group
+
+then Goto the TG and check health check
+
+********************************************************************
+
+hit on browser loadbalancer DNS with /laptop/ or /mobile/ and show data but "/" is imp only hit the LB DNS show directaly home page

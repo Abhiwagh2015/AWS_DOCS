@@ -1,0 +1,13 @@
+create 2 vpc with subnet gateway
+
+peering connection requester vpc-1 accepter-vpc2 action accept
+
+use default vpc-1 route table -1 add IG and subnet-1 add peering type subnet-2 address
+
+use default vpc-2 route table -2 add IG and subnet-2 add peering type subnet-1 address
+
+create security group ssh, all-traffic, All-ICMP-IPv4 
+
+create ec2 instances for two vpc
+
+goto ec2 and ping another private instance IP address

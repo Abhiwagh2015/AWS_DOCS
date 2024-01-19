@@ -1,0 +1,46 @@
+1. create bucket in perticuler availability zone 
+
+   bucket name is sagarsonule.tk
+
+      > ACL is enable
+      > get a public Access
+      > static website is enable
+      > upload css template  [also css files and folders are make a public]
+
+2. Goto Route 53
+
+   create Hosted Zone name is sagarsonule.tk (imp)
+   then created hosted Zone
+
+   go to the browser and click on freenom webservice login page the click domain then nameserver
+
+   go to route 53 copy 4 NS record and paste on freenome nameserver and save it
+
+then click on create record
+
+  click on Alias
+  Route Traffic to 
+       select Alias to s3 website endpoint
+       select specific region you are create bucket in region
+       then select sagarsonule.tk endpoint
+
+then create record
+
+3. goto browser 
+     then type sagarsonule.tk domain and show css template page
+
+4. Attach SSL/TLS certificate
+
+    search ACM (AWS Certificate Manager)
+    click request and next
+    then type domain name like sagarsonule.tk
+    click on request then click on view cerificate then click Create DNS records in Amazon Route 53
+    then click create record but cerificate show in pendig state
+
+5. Goto route53
+
+   refresh record the show new automatically record type like CNAME record 
+
+   the go to ACM show cerificate in pending state to issued
+  
+   

@@ -1,0 +1,121 @@
+   MUMBAI REGION
+
+1. create a VPC-A (CIDR- 10.100.0.0/16)
+
+2. create a PRIVATE SUBNET (10.100.0.0/24)
+
+3. create a PRIVATE ROUTE TABLE and associate private subnet
+
+4. crate a PRIVATE INSTANCE with
+   a. VPC-A
+   b. PRIVATE SUBNET
+   c. SECURITY GROUP 
+      all tcp 10.200.0.0/16 custom
+      icmp 10.200.0.0/16 for ping
+------------------------------------------------------------------------------   
+VARGANIA REGION
+
+1. create a VPC-B (CIDR- 10.200.0.0/16)
+
+2. create a INTERNET GATEWAY - attach to VPC-B
+
+3. create a PUBLIC SUBNET (10.200.0.0/24)
+
+4. create a PUBLIC ROUTE TABLE 
+   a. associate pubic subnet
+   b. edit route table add Internet Gateway
+
+5. crate a PUBLIC INSTANCE with
+   a. VPC-B
+   b. PUBLIC SUBNET
+   c. SECURITY GROUP 
+      all tcp 10.100.0.0/16 custom
+      icmp 10.200.0.0/16 for ping
+      ssh 22 over the internet 
+----------------------------------------------------------------------------------
+MUMBAI REGION
+
+1. create VIRTUAL PRIVATE GATEWAY VPG-A 
+   and attach to Private vpc VPC-A
+
+2. create CUSTUMER GATEWAY CG-VPCA-VPCB
+   with public IP of public instance
+
+3. create SITE-TO-SITE-VPN VPN-AB
+   a. attach virtual private gateway
+   b. attach custumer gateway 
+   c. routing option- static
+   d. IP prefix-  public subnet 10.200.0.0/16  
+-----------------------------------------------------------------------------------
+CONNECT TO CLOUDSHELL WITH PUBLIC INSTANCE
+
+1. yum install openswan -y
+
+2. vim /etc/ipsec.conf (uncommented following line if not commented)  
+      include /etc/ipsec.d/*.conf
+
+3. vim /etc/sysctl.conf (put 3 lines in last)
+
+ net.ipv4.ip_forward = 1
+ net.ipv4.conf.all.accept_redirects = 0
+ net.ipv4.conf.all.send_redirects = 0
+
+
+4. service network restart
+
+5. go to vPN CONNECTION 
+   a. download configuration
+   b. vendor- openswan
+   c. platform - openswan DOWNLOAD AND SAVE FILE
+
+6. create a file
+   a. vim /etc/ipsec.d/aws-vpn.conf 
+
+   PUT DOWNLOADED FILE HERE
+
+    {update <= lines by key confi. downloaded}
+
+conn Tunnel1
+        authby=secret
+        auto=start
+        left=%defaultroute
+        leftid=54.236.39.30                   <=
+        right=3.108.21.0                      <=
+        type=tunnel
+        ikelifetime=8h
+        keylife=1h
+        phase2alg=aes128-sha1;modp1024
+        ike=aes128-sha1;modp1024
+        keyingtries=%forever
+        keyexchange=ike
+        leftsubnet=10.2.0.0/24                <=public subnet
+        rightsubnet=10.0.0.0/24               <=private subnet
+        dpddelay=10
+        dpdtimeout=30
+        dpdaction=restart_by_peer
+
+7. create a file
+   vim /etc/ipsec.d/aws.secrets
+
+    PUT DOWNLOADED FILE HERE
+
+(client ip)  (server ip)        (Pre-Shared Key)
+54.236.39.30 3.108.21.0: PSK "dJM.dVBbH4ev_kGVYLpfDx73zGQzdC_1"      {put client ip and server ip & Pre-Shared Key}
+-------------------------------------------------------------------------------------------------------------------------------
+MUMBAI REGION 
+
+1. PRIVATE ROUTE TABLE
+   a. route propogation edit and ENABLE
+   b. propogate - yes will be shown
+-------------------------------------------------------------------------------------------------------
+1. CONNECT WITH CLOUDSHELL BY PUBLIC INSTANCE
+  a. systemctl start ipsec
+  b. systemctl enable ipsec
+  c. systemctl status ipsec
+
+2. ping private IP of private instance to showing connection establishing..
+
+
+* chkconfig ipsec on
+* service ipsec start
+* service ipsec status

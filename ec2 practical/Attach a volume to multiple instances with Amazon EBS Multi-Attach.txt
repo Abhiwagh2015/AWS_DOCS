@@ -1,0 +1,45 @@
+Attach a volume to multiple instances with Amazon EBS Multi-Attach
+Ans:-
+Launch two or more then instance
+Name:- instance-1				---first
+Ami
+T3 micro			if you are put t2 micro have you error t2 micro is not support to the multiattach instance
+Network setting select subnet 1a 
+Then all default normal
+Launch 
+Launch 						---first
+Name:-instance-2
+Ami
+T3 micro
+Network setting select subnet 1a 
+Then all default normal 
+Launch 
+Select volume 
+Create volume 
+Provisioned IOPS SSD (io2) 		---only available on this ssd we can create multiple volme 
+Select 5 gb
+Availablity zone 1a 		note the zone is specific 
+Enable multiattach
+Select Encrption 
+Select kms key 			If you don’t have then select default
+Select volume :- select action:- attach volume 
+Instance:- instance-1 		attach 
+Select volume :- select action:- attach volume 
+Instance:- instance-2		attach 
+Now go to the instance connect two instance 
+Lsblk 	- now you see the volume add to the two instance
+Lsblk -f 	- now you see the file system is connected or not 
+Mkfs.xfs /dev/nvme1n1		-- the file system command 
+Lsblk -f – now you show file system is connected
+Mount first
+Mkdir chote
+Cd chote   
+touch file{1..5}
+mount /dev/nvme1n1 /home/ec2-user/chote/		-- this is mount 
+Go to the terminal 2nd instance
+Lsblk -f 		-now you not see anything 
+Partprobe	- this command is used for update terminal
+Lsblk -f 		- now you see the file system is already connect
+Mkdir newone
+mount /dev/nvme1n1 /home/ec2-user/newone/		-- this is mount 
+cd newone : now you see the files on this 2nd instance

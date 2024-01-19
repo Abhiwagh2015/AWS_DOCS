@@ -1,0 +1,81 @@
+1.type of loadbalancer
+ (FT- fault torerance and HA--high availability)
+Application Load Balancer 7th layer port http/https
+Network Load Balancer 4th layer transport layer ports TCP/UDP/TLS (TLS mean Transport Layer Security)
+Gateway Load Balancer  when you need to deploy and manage a fleet of third-party virtual appliances that support GENEVE.
+
+2.ELB Listener
+
+3.Listener Rule
+
+4.TG
+
+5. AWS API (Application Load balancer) 
+    responce Time-Out is 5 seconds 
+    range is (2 - 60 set)
+ 
+        ping responece time 5 sec fix time period
+    ELB --------------------------------------------EC2
+
+6.Interval first and second time period 
+      (Interval time period 30 sec) 
+
+7.period of time between Health check
+       (Default 30 sec [range is 5 to 300 sec])
+
+8. Unhealthy Threshold
+    (default is 2 [range is 2 - 10 time])  Ex 2 time failed is considered unhealthy
+
+9.Healthy Threshold 
+    (default is 10 [range is 2 - 10 time])  Ex 10 time failed is considered unhealthy
+
+10.Path Or query
+
+
+***********************************************************************************************
+
+A network load balancer (NLB) and an application load balancer (ALB) are both types of load balancers used in cloud computing. They distribute incoming network 
+traffic across multiple servers to ensure optimal resource utilization, minimize response time, and improve overall application performance. However, there are 
+some key differences between the two.
+
+
+1. Layer:
+
+   - Network Load Balancer (NLB): It operates at the transport layer (Layer 4) of the OSI model. It balances the load based on the IP address and port number.
+
+   - Application Load Balancer (ALB): It operates at the application layer (Layer 7) of the OSI model. It balances the load based on the content of the request, 
+     such as the URL or the HTTP headers.
+
+
+2. Target Type:
+
+   - Network Load Balancer (NLB): It supports both instances and IP addresses as targets.
+
+   - Application Load Balancer (ALB): It supports only instances as targets.
+
+
+3. Protocols:
+
+   - Network Load Balancer (NLB): It supports TCP and UDP protocols.
+
+   - Application Load Balancer (ALB): It supports HTTP and HTTPS protocols.
+
+
+4. SSL/TLS Termination:
+
+   - Network Load Balancer (NLB): It does not support SSL/TLS termination. (Secure Sockets Layer, Obtain an SSL/TLS certificate from a trusted certificate authority (CA))
+
+   - Application Load Balancer (ALB): It supports SSL/TLS termination, which means it can handle the encryption and decryption of data at the load balancer level, 
+     reducing the load on the backend servers.
+
+
+5. Pricing:
+
+   - Network Load Balancer (NLB): It is generally more expensive than an Application Load Balancer due to its higher processing power and capacity.
+
+   - Application Load Balancer (ALB): It is generally more cost-effective for HTTP and HTTPS traffic.
+
+
+In summary, the choice between a network load balancer and an application load balancer depends on the specific requirements of your application. If you need to balance 
+ traffic based on the content of the request or require SSL/TLS termination, an application load balancer is the better choice. On the other hand, if you need to balance 
+traffic based on IP addresses and ports, and do not require SSL/TLS termination, a network load balancer is more suitable.

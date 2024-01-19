@@ -1,0 +1,231 @@
+steps IAM 
+
+serach IAM  --- now you see the IAM home screen 
+
+https://065068297386.signin.aws.amazon.com/console --- now you see the link , this link share your account then you share this link
+
+Account Alise - now you see the id 
+
+create 
+
+put propername like 
+
+annu1998 ---- done 
+
+now you see the changes to the url like this 
+
+https://annu1998.signin.aws.amazon.com/console
+
+create MFA 
+
+go to IAM  
+
+now you see the Add MFA 
+
+select virtual mfa --- bcoz we are use in mob that why
+
+then scan to QR code to the mob on screen 
+
+put code  MFA-1 898708 -- done 
+
+MFA-2 989654
+
+done 
+
+if you want to check then login now you see the mfa code 
+
+then you are login aws 
+
+Signing in to MFA-protected accounts requires a user name, password, and an authentication code from an MFA device.
+
+you have seen also access key and secrete key ----never said secrete key for any user this is risky 
+
+create user:-
+
+go to IAM 
+
+adduser
+
+put palash on user name 
+
+select Password - AWS Management Console access
+
+select costam password 
+
+put Palash@1998 
+
+next 
+
+Add user to group --- select add user to group 
+
+Use a permissions boundary to control the maximum user permissions  --- you select a policy to the user 
+
+next 
+
+next
+
+create user 
+
+downlaod csv 
+
+go to the user when you create 
+
+go to the link above and login user 
+
+now you see the change password for the user then change now 
+
+now you login the user 
+
+go to the any service now you see the error
+
+bcoz we not set a policy for the user that why error on this user first set policy then check user 
+
+Create policy:-
+
+go to policy 
+
+add policy 
+
+select policy 
+
+if you are worning resources 
+
+then select resource and select the one by one then
+
+put name discreption and create policy 
+
+now you see the policy is there on policy list 
+
+if you want to user get psermiison to get access to any service 
+
+first create a group 
+
+add add user to this group with set permission to the group 
+
+now you see the permission is set for the user 
+
+******if agr hame koi user ko pahele hi full acesss ki permission di hai then group me other permission hai to vo user ko permiison group ki jayengi*******
+
+*******But agr user ko strong permiisson hai & group ki permission use week hai to us user ko dono permiison rahengi uski default permission vsisi hi rehengi or ye add hongi 
+
+
+If you want to add user but you want Ec2 permiison set on this user then 
+
+create user 
+
+select the group and add this user 
+
+now this permission direct access to the user 
+
+if you want other users change password to the another formate you go on this polices
+
+go account setting 
+
+change password policy 
+
+and select what you want the user set password with this formate 
+
+***********imp *****
+
+how to check polices to the user when you set permission 
+
+go to the users
+
+and select name ---- now you see permission groups tags etc..
+
+if you add permiison to access the user with any permission 
+
+go the users
+
+and select name 
+
+select add permission 
+
+and select permiission 
+
+done 
+
+now you check the user are work on this service or permission 
+
+			****************LAB-02*************
+
+what is inline policy :- inline policy means not a default policy we will create something diffrent policy we crete now 
+
+go to IAM 
+
+set permiison to user a ec2 read only 
+
+set permission to the group ec2 full access
+
+if any permission set on group then remove first
+
+go to group 
+
+select name of group 
+
+select permission 
+
+select permiision when you set already 
+
+Remove now ----- then you see the remove this permission 
+
+go to the user and check when you attach permissios 
+
+if a user have permission to the ec2 full access and group permissison is s3 full access then you see the permission the attach direct and attach from the group 
+
+now login to the user when you add the group this user can login 
+
+create bucket 
+
+search s3
+
+create bucket 
+
+put name tomrider 
+
+and press create -- now you see the bucket is created that means your permiison is sucessfull 
+
+go to root user 
+
+now remove permission to the user s3 bucket 
+
+then to the user 
+
+now you see this user can't create a bucket 
+
+go to the root user 
+
+create a group and set policy to the Billing 
+
+set newuser to get permission to the billing 
+
+and go the account and scroll down
+
+IAM User and Role Access to Billing Information ---- now you see the name first activate this if you didnt acctivate then the user cant access billing  ******imp****
+
+Activate IAM access --- updet --- 
+
+go to the newuser account 
+
+click newuser@1998 now you see the billing Dashbord
+
+now you see the biling of this user
+
+inline policy 										******imp****
+
+go to user
+
+click username 
+
+go to permission 
+
+click inline policy 
+
+now you set perticular policy ex. list not all set perticular like copy image or other what you want 
+
+and select review policy 
+
+now the success the policy is add on this user 
+
+
+

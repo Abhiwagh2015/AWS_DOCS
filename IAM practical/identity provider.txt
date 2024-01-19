@@ -1,0 +1,46 @@
+goto jumpcloud console 
+create account email address with password
+sign up account
+then go to application
+   search AWS IAM and configure
+       display name like AWS_SAMl
+             then create
+   click on create AWS_SAML download MeTaData file
+   and show URL for login AWs account console
+
+Goto AWS ACCOUNT
+ click on Identity provider
+ create provider then select SAML2.0
+ type provider name 
+     then choose sercurity related medatada file
+ create
+
+click on Role
+ Create Role 
+ select SAML 2.0 federation
+ select you create Identity provider
+  and select allow programatic and console access
+  choose permision like s3fullaccess
+
+copy identity provider ARN
+copy role ARN
+
+Then goto jumpcloud 
+click on single-sign out
+   attribute fill in both of ARN with ,
+    save
+
+create user manual create user in jumpCloud
+   type name and data
+   create password
+   custome attribute 
+   role name
+  attribute value  give role ARN also paste Identity provider then save
+
+also create group 
+and choose user create in jumpcloud
+application choose AWS then save
+
+click on application go single sign out copy url thetype email id and password paste on browser 
+
+show s3 access

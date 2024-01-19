@@ -1,0 +1,83 @@
+serch IAM  
+
+then you see the 4 features it is important
+
+account id is uniq 
+
+user create 
+
+add user
+
+user name  - palash
+ 		- jay
+
+
+select passowrd AWS management
+
+custom password-- palash@123
+
+click require password reset  ---- bcoz password change kr payenga
+
+set paermission  attach existing poiciy directly 
+
+administator policy
+
+add tages ---- 
+
+create user
+
+
+copy link and paste 
+
+asw console 
+
+go to user
+
+s
+setpermiison boundries ---- learn 
+
+they are 3 identity
+user
+group
+role 
+
+how to role create 
+
+AWs service 
+
+select EC2
+
+selcect role adminstrate
+
+CDEC.34 role 
+									task assume role & what is inline policy 
+create policy 
+
+visual editour
+
+select EC2
+
+action expand all 
+
+list read create 
+
+all resouces
+next 
+
+add tages
+
+name 	ec2_coustam 	
+
+type	readoly_listing
+
+Env	Dev 
+
+done
+
+name :ec2_custom
+
+listing only and read only ec2 all resource
+
+create policy 		
+
+									ARN - AMAZON RESOURCE NAME 

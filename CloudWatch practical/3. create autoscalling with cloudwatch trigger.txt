@@ -1,0 +1,84 @@
+create template with httpd service
+
+Goto autoscalling
+Auto Scaling group name  Ex. ASG-autoscalling
+select you create Launch template
+next
+select VPC
+select all Availability Zones and subnets
+next
+select No load balancer
+Next
+Desired capacity 4
+Minimum capacity 3
+Maximum capacity 6
+Next
+add notification
+create SNS topic for GoTo the SNS service in new tab
+create topic name Ex. my-topic
+Select standard
+create topic
+select your topic 
+create subscription
+select protocol Email
+Endpoint type your email address Ex. sagar.sonule001@gmail.com
+click on create subscription
+Goto your gmail account and select confirm subscription for topic
+then show pending confirmation to confirm
+
+
+then return to "add notification" and select you create topic
+Next 
+create auto-scalling group
+
+select you create autoscalling group
+select option  "Automatic scalling"
+click on create dynamic scalling policy
+select simple scalling type Scaling policy name "increment-policy"
+then imp select cloudwatch alarm but not created firstly "create cloudwatch alarm"
+
+
+Goto CloudWatch service
+create alarm for "Increment Alarm" 
+select matrix  next
+Browse matrix select Ec2 then select By Auto scalling Group
+select ASG-autoscalling   cpu-utilization then click select matrix
+then condition select Threshold type is "Static"
+then select cpuUtilization Greater/Equal the type 60 % cpu utilization then next
+select existing SNS topic Ex. my-topic then next
+type alarm name is "Increment Alarm"   then create alarm
+
+******************************************************
+
+create alarm for "Decrement Alarm" 
+click create alarm
+select matrix  next
+Browse matrix select Ec2 then select By Auto scalling Group
+select ASG-autoscalling   cpu-utilization then click select matrix
+then condition select Threshold type is "Static"
+then select cpuUtilization Lower/Equal the type 20 % cpu utilization then next
+select existing SNS topic Ex. my-topic then next
+type alarm name is "Decrement Alarm"   then create alarm
+
+return page into dynamic scalling policy
+refresh cloudwatch alarm
+then select Increment-alarm
+Take the action Add 8 then create
+
+Goto auto-scalling group
+select you create autoscalling group
+select option "Automatic scalling"
+click on create dynamic scalling policy
+select simple scalling type Scaling policy name "Decrement-policy"
+then select Decrement-alarm
+Take the action Remove 1 then create
+
+for Increment CPU utilization command type in running instances
+sudo yum install stress -y
+stress
+stress --cpu 90 --io 4 --vm 2 --vm-bytes 128M --timeout 10m
+w or uptime :- command through check the cpu utilization
+
+Note: 
+1. you have a minimum capacity is 3 but within desired capacity is 4 so cpu utilization is Decrease below 20<= then trigger the Decrement-alarm then apply Decrement-policy remove 1 instance then show running istance is 3  then sent notification the Email through for user
+2. you have a maximum capacity is 6 but cpu utilization is Increase after 60>= then trigger the Increment-alarm then apply Increment-policy add 8 but you mention maximum capacity is 6 so 6 instances will be created instance then sent notification the Email through for user

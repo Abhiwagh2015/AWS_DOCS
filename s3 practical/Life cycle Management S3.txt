@@ -1,0 +1,54 @@
+lifecycle managment  
+
+		that means koi deta hame jyda din tak nhi rakhna hai vo delete hona chiye ek perticular time pe ex.90days me to ham policy lagate hai object lifecyle policy 
+
+
+go to services
+
+serach s3 
+
+create bucket  ---- we apply on only bucket 
+
+block all public access remove 
+
+create now 
+
+click bucket name 
+
+file upload on the bucket 
+
+go to Management 
+
+lifecycle configuration 
+
+create lifecyle rule 
+
+go to name "lifecycle"
+
+Apply to all objects in the bucket --- select this one *
+
+Move current versions of objects between storage classes  ----select this one
+
+Standard IA 		30 days  -- 30 days me standard IA me jayengga output 
+
+one zone 			60 days  --then 60 days me one zone me jayenga 
+
+galcier flixebale 	180 days  --then 180 days me galicir me jayenga then permanant delete 
+
+save 
+
+you can edit or 
+
+Permanently delete noncurrent versions of objects --- select this one *
+
+Days after objects become noncurrent --- put 365days
+
+Number of newer versions to retain - Optional -- put 7 days 
+
+Delete expired object delete markers or incomplete multipart uploads  --- see this 
+
+Delete expired object delete markers --- you select also if your object is expired then its automatically delete 
+
+Delete incomplete multipart uploads ---- you select also this one is if your file is incomplete then its automatic delete for set a days 
+
+ex. 7days  --- then delete duratiation is 7 days 

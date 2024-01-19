@@ -1,0 +1,26 @@
+******************CloudWatch Monitoring service in AWS*****************************
+
+Amazon Cloudwatch is a monitoring and observability service in AWS that provides real time insights into your application
+resourcess and infrastructure. It allow you to collect and track metrics, collect and monitor log files,and set alarms.
+
+You can use cloudWatch to 
+1. Metrics Monitoring
+2. Logs Monitoring
+3. Alarms And Notifications
+4. Dashboards
+5. Custome metrics
+6. Events
+7. Anomaly Detection
+
+There are Two types of Monitoring
+1. Basic Monitoring  (Monitoring within 5 minute) 
+2. Enhanced (Detailed) Monitoring
+    Additional metrics
+    Granular Resolution(metrics are collect often with 1 minutes interval)
+    Additional Cost
+    Ec2 Instance level
+
+There are Three type of states
+1. In alarm
+2. Ok
+3. Insufficient Data

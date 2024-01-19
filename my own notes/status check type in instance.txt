@@ -1,0 +1,20 @@
+The status check of an EC2 instance in AWS is reported in the format of "status check type X/Y", where X indicates the number of checks that have failed and Y indicates
+ the total number of checks performed. The checks are performed by AWS automatically at regular intervals to ensure that the instance is healthy and functioning properly.
+
+The two types of status checks that AWS performs are the Instance Status Check and the System Status Check. The Instance Status Check monitors the instance at the system level,
+ while the System Status Check monitors the underlying infrastructure and hardware.
+
+Here's what each possible status check type means:
+
+"status check type 0/2" - This means that the instance has failed both the Instance Status Check and the System Status Check. 
+                          This indicates that there is a problem with the instance or the underlying infrastructure, and corrective action is needed.
+
+"status check type 1/2" - This means that the instance has failed one of the two status checks. It is important to investigate the issue and take corrective action.
+
+"status check type 2/2" - This means that the instance has passed both the Instance Status Check and the System Status Check, indicating that the instance is healthy and functioning properly.
+
+"status check type 0/1" - This means that the Instance Status Check has passed, but the System Status Check has failed. This may be due to issues with the 
+                          underlying infrastructure, and corrective action may be needed.
+
+"status check type 1/0" - This means that the Instance Status Check has failed, but the System Status Check has passed. 
+                          This may indicate a problem with the instance itself, such as an issue with the operating system or applications running on it.

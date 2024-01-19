@@ -1,0 +1,65 @@
+ step1: create a role AdministratorAccess Name: Ex. lambda_role
+
+step2: create s3 bucket Ex. lambda_bucket_100
+       upload the object
+
+step3:-Goto the "Lambda" Service
+       click on function
+       click on Author from scratch
+       Type Function name "my_lambda_s3"
+       choose runtime language "Python 3.7"
+       click on Change default execution role
+               choose and select existing role Ex. lambda_role
+       click on create Fucntion
+
+step4:- click on code and copy the following code but change the "table name" and "partition type"
+       
+import boto3
+from uuid import uuid4
+
+def lambda_handler(event, context):
+    s3 = boto3.client("s3")
+    dynamodb = boto3.resource('dynamodb')
+    dynamoTable = dynamodb.Table('mytable')         #type table name replace "mytable" in dynamodb 
+    
+    for record in event.get('Records', []):
+        bucket_name = record['s3']['bucket']['name']
+        object_key = record['s3']['object']['key']
+        size = record['s3']['object'].get('size', -1)
+        event_name = record['eventName']
+        event_time = record['eventTime']
+        
+        dynamoTable.put_item(
+            Item={
+                'demo': str(uuid4()),        #partition key name "demo" string format in "mytable" dynamodb 
+                'Bucket': bucket_name,
+                'Object': object_key,
+                'Size': size,
+                'Event': event_name,
+                'EventTime': event_time
+            }
+        )
+
+
+step4:- click on test  & create new event
+        Event name:- Ex. "my_event"  click "save"
+        click on Deploy and Test varified the code is done or not 
+
+step5:- click on Configuration 
+        click on Permition and edit change Timeout 1 min 3 sec
+
+step6:- click on +Add trigger
+        search and click  s3
+        choose Bucket  "lambda_bucket_100" 
+        Acknowledge click and Add
+
+step7:-Goto DynamoDB service
+       click on tables and create table
+       table name is important type "mytable"
+       Partition key is important type "demo"
+       create table
+
+step8:- upload the new data on s3 bucket 
+
+step9:- Goto DynamoDB click on table an click on Explore table Item
+        show s3 data in item Returend and fetch the data or refresh the page

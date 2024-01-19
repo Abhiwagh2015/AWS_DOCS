@@ -1,0 +1,62 @@
+
+step 1. create EC2-instances
+
+step 2. Create increase CPU-utilization command for instance
+        sudo -i
+        sha1sum /dev/zero &    :type for increase cpu utilization (min 4 time enter command)
+        top   (show jump chatrus created for increase cpu utilization)
+ 
+        Stop CPU-utilization command for instance
+        top
+        ps -a
+        kill all pid 2224 2225 2226    #multiple sha1sum pid
+        ps -a                          # show to delete sha1sum pid
+
+step3. create alarm steps
+       select instance click on "Actions"
+       select "Monitor and troubleshoot"
+       select "Manage Cloudwatch alarms" 
+
+       Choose "Create an alarm"
+       Alarm action select "Stop"    #means trigger to greater than CPU-utilization 70% after stop the instance
+       percent "70"
+       Type alarm name Ex. "action-stop-alarm"
+       show "sample matrix data at 70%" and create
+
+OR
+
+step3. Search simple Notification Service "SNS" Service
+       click "create topic"
+       select type "Standard"
+       type Topic name Ex. "my-topic"
+       Display name Ex. "my-Training" click "create topic"
+       click "Create Subscription"
+       protocol select "Email"
+       Endpoint type your email "sagar.sonule001@gmail.com"  click "Create Subscription"
+       GoTo email account and click "confirm subscription" 
+      
+      click your topic 
+      click publish massage
+      Subject "Sample Notification"
+      Massage Body in Type any type of massage #massage show your notification on mail
+            
+
+step4. Goto "CloudWatch" service
+       click on "In alarm"
+       click "create alarm" next "select matrix" 
+       In matrix click "EC2"
+       select "Per-Instance Metrics"
+       Copy "cpu-utilization instance id" & paste it "in search tab"
+       Choose matrix Ex. "cpu-utilization" click select matrix
+    
+       choose peried 5-minute
+       select Threshold type "static"
+       cpu-Utilization select "Greater/Equal" than "60%"  Next
+       Choose "In alarm" 
+       select an existing SNS topic
+       select you created existing topic Ex. "my-topic"
+       Ec2 action in Click "stop this instance" next
+       type Alarm name ex."notification alarm" next $ create alarm
+
+practical :-
+   suppose, your cpu-utilization in 70% sent notification on your email and stop the ec2-Instance 

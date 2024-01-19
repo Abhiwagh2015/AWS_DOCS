@@ -1,0 +1,19 @@
+1. Goto snapshot
+   click on Recycle bin
+
+2.create retention rule
+   type name Ex. rule-1
+       (this is create only for snapshot suppose company environment automaticaly root volume or ebs volume get the daily basis snapshots for backup but suppose any 
+        mistake through delete number of snapshot so how to restore these type of important snapshot)
+   Resource type :  EBS snapshot select --- and click on create retention rule
+
+3. Goto snapshot and click on Recycle bin
+   click on resources
+    no-snapshot is available because of no one snapshot are deleted
+
+4.Goto snapshots and any one snap is delete
+
+5.Return Go to resources check it again showing your snapshot is deleted check information for snapshot.
+  click on recover
+
+6. Goto snapshot your snapshot is show

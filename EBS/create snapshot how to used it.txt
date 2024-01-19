@@ -1,0 +1,51 @@
+1.create two instances in one availabillity zone
+     1.web-server
+  
+2.create new volume
+     name : new-volume, 5GB storage, General purpose GP2
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 3.Goto volume
+    click on volume goto actions and attach then select instance web-server
+    device name automatically show /dev/sdf but you have to change
+
+4.Goto instance web-server
+    lsblk   #show xvdf
+    df -h   #not show xvdf storage because of not available file system
+    file -s /dev/xvdf      #show filesystem have or not
+    /dev/xvdf: data    #suppose this massage is show no filesystem available
+    mkfs.ext4 /dev/xvdf    #this command through take a filesystem
+    file -s /dev/xvdf  
+        /dev/xvdf: Linux rev 1.0 ext4 filesystem data, UUID=94937119-1f50-40a2-80aa-4cff2d34a7c8 (extents) (64bit) (large files) (huge files)   #mean filesystem available
+          
+    lsblk
+    df -h    #no mount block but add filesystem
+    mkdir /data
+    mountpoint /data     #show directory mount or not
+    mount /dev/xvdf  /data
+    df -h
+    resize2fs /dev/xvdf    #following massage is show
+       resize2fs 1.46.5 (30-Dec-2021)
+       The filesystem is already 1310720 (4k) blocks long.  Nothing to do! 
+    cd /data
+    touch file_{1..10}
+    yes "Hello Students" > abc.txt   #this is loop in increase the file storage
+    ls -lh
+    271m    #this is data are use directory
+    df -h   #show storage with block
+   
+5.Goto volume & create snapshot for volume
+  return goto terminal 
+  echo "Hello Sagar" > xyz.txt
+
+6.Goto snapshot
+  click on actions ---  goto create volume from  snapshot ---save anather volume ---but check availability zone tjsn thsn you create same as availability zone                                    
+  and add tagname
+
+7.attach volume from  instance ..
+   lsblk   
+   file -s /dev/svdf
+   mkdir /program
+   mountpoint /dev.svdf
+   mount/dev/programe 
+   df -h
+   cd /program
+    

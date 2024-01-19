@@ -1,0 +1,42 @@
+search on browser "aws cli 2 download"
+
+click on "Install or update the latest version of the AWS CLI"
+
+Download and run the AWS CLI MSI installer for Windows command prompt(64-bit):
+     msiexec.exe /i https://awscli.amazonaws.com/AWSCLIV2.msi
+     msiexec.exe /i https://awscli.amazonaws.com/AWSCLIV2.msi /qn
+     aws --version
+
+cd c:\User\sagar\cd .aws
+
+c:\User\sagar\.aws\
+
+aws configure --profile user1
+AWS Access key
+AWS secret Key 
+region
+
+dir 
+   config
+   credentials
+
+type credential
+show profile
+
+aws s3 ls --profile user1
+   :-show s3 bucket because of user1 policy attach s3 read only acccess
+
+aws s3api create-bucket --bucket my-bucket-sagar1235 --region us-east-1 --profile user1   
+      :- create bucket using cli2
+
+delete file in command promt
+del config 
+
+
+*****************
+
+user1 get the access of ec2readonlyaccess
+
+aws ec2 describe-instances --profile user1 --output table    :show instancess table 
+
+aws ec2 describe-instances --profile user1 --output json  :- show instance full information

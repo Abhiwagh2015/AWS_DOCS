@@ -1,0 +1,88 @@
+aws launch machine for windows :- 
+
+steps:- 
+
+login first
+
+go to service and select ec2 instant
+
+select instances
+
+select launch 
+
+name:- windowsserver ---- name anything 
+
+application and OS image:-windows micro server  ------ use free server 
+
+instance type:- t2.micro  ------its free thats why any time this is used 
+
+key pair:- select key  ----- if you have not a key then 
+
+		create new pair key:-newkey ----select keypair ---- now you see the download key this is encrpted form 
+
+network:- select edit:- and add RDP this is used for windows  
+		if you want to add service then select and add the services 
+
+configure storage:- if you wnat to add storage you must add but if you increase the storage then you have to pay it 
+
+Launch instance ------ now you see the success
+
+go to instences and refresh now you see the windowsserver name 
+	if this is 2/2 check passed now this is sucessful login 
+
+select a box then connect 
+
+select RDP client 
+
+select Download remote desktop file 
+
+select get password 
+
+select browse select newkey 
+
+Select Decrepte  ---- now you see the password Decryption Successful 
+
+copy password ---- now you see the password then copy first 
+
+go to desktop file this is downloaded check downlaod list 
+
+select windowsserver 
+
+connect
+
+password ---- paste password now and okay then yes 
+
+now you see the new windows screen 
+
+then close the window and go to instense
+
+now select and delete the windowserver bcoz if you are long time to run this mahcine then you have to pay it 
+
+select instance state :- terminate  ---- now you see the terminate 
+
+
+ec2 windows server aws ssh to the gitbash
+
+search ec2
+
+click instance 
+
+launch instance 
+
+select aws  machine 
+
+save 
+
+then go the gitbash 
+
+cd Downlaod  --- because key is download folder thats why go to the Downlaod then put command ssh 
+
+
+$ ssh -i newkey.pem ec2-user@18.183.204.111
+		|				|
+	go to the main		when you launch instance select name now you see the ipv4 to the public ip 
+	path Downloads 
+now you login to the aws console to the ssh through 
+
+
+

@@ -1,0 +1,18 @@
+Syllabus:-
+-AWS intro
+-Foundation:-IAM(Identity and access management), 
+                      AWS Price calculator 
+-Storage Service:- S3(Simple storage service) 
+                             EBS(Elastic block storage) 
+		             EFS(Elastic file system) 
+-Computing Service:- EC2(Elastic compute cloud)
+                                   ELB(Elastic Load balancer)
+			           AS(Auto scaling)
+-Networking Services:- VPC(Virtual private cloud)
+                                      NAT, CDN, Rout53,  ACM
+-Monitoring Services:-CW (Cloudwatch)
+-Serverless:- Lambda services 
+-Provisioning service:- CF(Cloud formation)
+-Platform as a service:- Elastic Beanstalk
+-Database service:- RDS(Relational Database Service), DynamoDB
+-Notification:-SNS(Simple notification service) & SQS(simple queue service)

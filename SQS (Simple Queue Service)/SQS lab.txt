@@ -1,0 +1,51 @@
+SNS  pull base (mechanism)  service
+
+step 1. Search simple Notification Service "SNS" Service
+       click "create topic"
+       select type "Standard"
+       type Topic name Ex. "my-topic"
+       Display name Ex. "my-Training" click "create topic"
+       click "Create Subscription"
+       protocol select "Email"
+       Endpoint type your email "sagar.sonule001@gmail.com"  click "Create Subscription"
+       GoTo email account and click "confirm subscription" 
+
+step 2. search "SQS" service
+        create 1st queue
+        select type "standard"
+        name type "Queue-for-inventory"  then create
+        
+        create 2st queue
+        select type "standard"
+        name type "Order-for-analysis"  then create
+
+        return select "queue" show both of queues
+
+step 3. selct 1st queue "Queue-for-inventory"
+        click "sns subscription" then click "Subscribe to Amazon SNS topic"
+        select you create SNS existing topic Ex. my-topic then "save"
+
+step 4. selct 1st queue "Order-for-analysis"
+        click "sns subscription" then click "Subscribe to Amazon SNS topic"
+        select you create SNS existing topic Ex. my-topic then "save"
+
+step 5. return to "SNS" service 
+        select you created topic "my-topic"
+        you show to 3 subscription endpoint
+        1st email subscription
+        2nd is queue for inventory subscription
+        3rd is order for analysis subscription
+
+        click "publish massage"
+        type subject in any Ex. my-massage
+        massage body any type massage
+        click "publish massage"
+
+step 6. return go to SQS service queue
+        click on "order-for-analysis" queue
+        click send and received massage
+        type any massage in massage body
+        click on "send massage"
+        after click "poll for massages"
+
+ 

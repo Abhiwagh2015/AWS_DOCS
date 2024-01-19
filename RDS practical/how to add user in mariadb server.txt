@@ -1,0 +1,8 @@
+. how to add user in mariadb server
+Ans :-
+create user 'user2'@localhost identified by 'palash123' 	this is for user create command 
+select user from mysql.user		--- show all users in mysql 
+    
+grant all privileges on *.* to 'user1'@localhost identified by  'password1';	--- user create with all permission 
+grant all privileges on  'yourDB'.* to  'user1'@localhost;		--- for existing user permission 
+show grants for 'user1'@localhost;		--- show permissions for the user 

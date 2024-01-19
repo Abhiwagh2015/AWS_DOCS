@@ -1,0 +1,42 @@
+step 1. create policy
+
+>select service "s3 search"
+>click on List ---click All list access
+>click on read ---click All list access
+>click on write ---click All list access
+
+Resources
+
+>click specific
+
+>bucket click 'Add Arn' "paste bucket ARN" Ex.arn:aws:s3:::aish2023
+>job tick only in box
+>object click 'Add Arn'
+       Any bucket Name type bucket name "aish2023"
+       click any object #mean this bucket access all object perticuler user
+       Add Arn for bucket
+Click on "Next"
+type policy name
+Description type for your choice
+add tag for your choice
+create policy
+
+step 2. create user
+
+>type user name :- sagar
+>tick on "Provide user access to the AWS Management Console - optional"
+>select "I want to create an IAM user"
+>click on "Custom password"
+   type password
+>untick on "Users must create a new password at next sign-in (recommended)"
+>click on "Attach policies directly"
+>search you create policy Ex. bucket-user-policy
+>click on "bucket-user-policy"
+>click on create user 
+>click on "Download .csv file" For Authentication and copy URL paste in Anather browser for login user
+
+
+step 3. login user
+
+>search "S3 service"
+>list all buckets but you can access perticuler bucket because of only you have permission this bucket Ex Aish2023 bucket

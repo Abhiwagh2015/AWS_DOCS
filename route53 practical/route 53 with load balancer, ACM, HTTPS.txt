@@ -1,0 +1,71 @@
+create Project in Virginia Region Instances & ACM
+
+1. create 4 instance
+    1. subnet-1 10.0.0.0/24  name : web1
+    2. subnet-2 10.0.1.0/24  name : web2
+    3. subnet-3 10.0.2.0/24  name : app1
+    4. subnet-4 10.0.3.0/24  name : app2
+
+2. create load balancer 
+   1. select application loadbalancer type
+   2. type name Ex. my-ALB
+   3. scheme select Internet facing
+   4. select vpc
+   5. select public AZ where u create subnet (but required more than 2 subnet)
+   6. select security group
+   7. create target group (goto new console)
+             1. choose a instance type Ex. Intances
+             2. type target group name Ex. my-TG
+             3. select VPC  --Next
+             4. choose instance traffic divert into app1 & app2
+             5. click include as pending below 
+             6. create target group
+   8. select TG & create loadbalencer
+
+3. click TG and select group healthy or not healty is important
+
+4. select loadbalancer DNS and hit on browser its app-1 & app-2 data is show or not
+
+5. Goto freenom and login the page 
+
+6. Goto Route53 service and create hosted zone
+     1. domain name Ex. sagarsonule.tk
+     2. after that these 4 records are copy and paste in freenome domain server  (but dont ignore and check mistake)
+
+7. click DNS and create record
+       1. click on Alias
+       2. select "Alias to Application and Load Balancer"
+       3. choose region Ex. US East (N.Virginia) --where to create your LB
+       4. select you create ALB Ex. my-ALB then create record
+
+8. Goto browser type DNS and refresh it DNS redirect on ALB then which port divert are traffic like TG then show data like LB
+
+***************************************************************************************************************
+
+9. search ACM service for create AWS certificate Manager
+       1. click on request and Next
+       2. type sagarsonule.tk domain name and create
+       3. click on blue screen and click on View certificate
+       4. click create records in Route 53
+       5. then show in pending state then show in Issued
+
+10. Goto Route 53 service then refresh record to show new CNAME record
+
+11. select ALB
+      1. drop the page Listener and rules
+      2. click on Add listener
+             1. select protocol HTTPS : 443
+             2. select Target Group & down the page then check Default SSL/TLS server certificate select From ACM select ACM certificate
+             3. Add
+
+12. click on HTTP:80 Goto Manage listener
+    click on Edit listener
+    protocol is HTTP :80
+    click Redirect to URL  and select Protocol HTTPS:443
+    click on save changes
+
+Note :- suppose your HTTPS listener port in show error Not Reachable so click on error listen the error the Go To Security Group then Add port 443 then save 
+
+13. goto browser then type domain name sagarsonule.tk and show it secure your dns like get a lock
+      
+

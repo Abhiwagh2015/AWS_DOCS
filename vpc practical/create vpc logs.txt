@@ -1,0 +1,16 @@
+.Create vpc logs 
+Ans :- first creat vpc
+	Clik the vpc
+	Now you see the flow logs
+	Create flow log
+	Name:- flow-log-s3
+All
+	Select :- send to an amazon s3 buckets
+	Select:- 10min or 1min 			--- agr 1 min kiya to har ek min me generate honga
+	S3 bucket arn:-now you see the create s3 bucket 
+	Crate bucket now 
+	Now you select bucket :- select properties:- now you see the ARN
+	Copy this arn and back to the page vpc flow log 
+	Put arn :- arn:aws:s3:::hellomini
+	Create flow log 
+	Now go to the S3 bucket now you see the logs generate at every one min 

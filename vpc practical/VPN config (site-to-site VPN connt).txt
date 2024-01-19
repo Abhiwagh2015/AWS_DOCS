@@ -1,0 +1,81 @@
+||*|| VPN config ,site-to-sitr VPN connection ||*||
+
+ #aws-site (Mumbai)
+   
+ -> create vpc(aws-site)10.1.0.0/16 ->create private/pub-sub 
+    ->create IG(site-IG) & attach to VPC ->rout table(site-RT) associate sub & rout with IG 
+    ->create EC2 inst enable pub-IP (SSH,all ICMP IPv4).
+
+ #customer-site (Virginia)
+
+ -> create vpc(customer-VPC)10.2.0.0/16 ->create public-sub 
+    ->create IG(customer-IG) & attach to VPC ->rout table(site-RT) associate pub-sub & rout with IG 
+    ->create EC2 inst enable pub-IP (SSH,all TCP,all ICMP IPv4).
+
+ #aws-site (Mumbai)
+ 
+ - create coustomer gateway (CG-aws-site)
+   ->rout=static ->TP=<public IP of coustomer EC2 insta>
+ - create virtual private gateway(VPG-aws-site)
+   ->attached to VPC.
+ - site-to-site VPN (n.ver-singa)
+   ->targer virtual pri-GW=slect VPG & CG ->IP=<VPC CIDR of Customer-sitr(10.2.0.0/16)>
+   the connection take 5-8 min for active.
+ - after activation download the configration file.(delete openswan
+
+ #customer-site (Virginia)
+ 
+ - take ssh of EC2 inst
+   [ec2-user]: sudo su
+   [root@192]: yum install openswan -y
+   [root@192]: vim /etc/ipsec.conf
+               # /etc/ipsec.d/*.conf      ->this line should be uncommented & save(:x).
+   [root@192]: vim /etc/sysctl.conf       ->create the file & insert the data from config file below the commented line's
+               net.ipv4.ip_forward = 1
+               net.ipv4.conf.default.rp_filter = 0
+               net.ipv4.conf.default.accept_source_route = 0 
+   [root@192]: service network restart 
+   [root@192]: vim /etc/ipsec.d/aws-vpn.conf  ->put data from downloaded config file.(tunnel 1)   
+               conn Tunnel1
+	               authby=secret
+	               auto=start
+	               left=%defaultroute
+	               leftid=13.212.181.253
+	               right=3.226.183.190
+	               type=tunnel
+                 	   ikelifetime=8h
+	               keylife=1h
+	               phase2alg=aes128-sha1;modp1024
+	               ike=aes128-sha1;modp1024
+	               auth=esp------------------------------>"delete this line when put this into config file"
+	               keyingtries=%forever
+	               keyexchange=ike
+	               leftsubnet=<VPC CIDR of customer>
+	               rightsubnet=<VPC CIDR of aws-site>
+	               dpddelay=10
+	               dpdtimeout=30
+	               dpdaction=restart_by_peer
+                 =save.(:x)
+   [root@192]: vim /etc/ipsec.d/aws-vpn.secrets    put data from downloaded config file.(tunnel 1)
+               13.212.181.253 3.226.183.190: PSK "kkBdLq9h4PAxgJItDNSEaGsqgft_l_gP"
+               <customer public IP> <aws-vgw-public-IP>: PSK "preshared key"
+                 =save.(:x)
+   [root@192]: checkconfig ipsec on
+   [root@192]: service ipsec start
+   [root@192]: service ipsec status
+
+ #aws-site (Mumbai)
+
+ - go to rout table(site-RT)
+   ->rout propogation ->edit rout prop ->shows vgw.....[*]click & save 
+ - when tunnel up it show customer VPC IP (10.2.0.0/16)in site-RT.
+
+ - go to site-to-site VPN ->show tunnel 1 is UP.
+ 
+ - ping each others with privet IPv4.
+  
+
+
+
+ 
+         

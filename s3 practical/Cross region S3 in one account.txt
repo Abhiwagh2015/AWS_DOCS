@@ -1,0 +1,78 @@
+cross Region Replication 
+
+create bucket 
+
+versioning enable 
+
+create bucket now 
+
+create bucket -2 
+
+change Region any one but not two are same 1 & 2 are diffrent region 
+
+ex. select mumbai
+
+versioning enabled 
+
+crate bucket now 
+
+now you have two bucket 
+
+if you want to check bucket out form the storage 
+
+go to ec2 change Region mumbai and check s3 bucket 
+
+now you have see the buckets when you create  ---- thats why we see the s3 service is global 
+
+if you have uplaod the file on north region on the first bucket 
+
+then you have to see the bucket2 on the same file on the other region 
+
+then you cant see the bucket 
+
+solution is 
+
+select any bucket name 
+
+go to the management 
+
+Replication rule  ---- now create a replication rule 
+
+enter rule name "newrule"
+
+status Enabled 
+
+Destination *
+
+Choose a bucket in this account  --- you type the bucket name 
+
+if you dont no the  name then browse s3 
+
+select bucket name "tomrider"  	--- this bucket is norh region 
+
+select IAM role 
+
+choose create new role 
+
+if you create a bucket on the bucket1 now you see the same file on bucket 2 
+
+Change the storage class for the replicated objects --if you want to change the storage then you select this one 
+
+save 
+
+the relpace now  --- select now *imp* if you didnt select then your task is not perform 
+
+then go the bucket1 and upload the any file 
+
+go the bucket 
+
+click bucket2 
+
+now you see the bucket1 upoladed data on this bucket2 
+
+
+
+
+
+
+

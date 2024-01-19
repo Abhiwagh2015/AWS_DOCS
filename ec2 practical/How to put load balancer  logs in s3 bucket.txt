@@ -1,0 +1,19 @@
+How to put load balancer logs in s3 bucket 
+
+Ans:- first all the process of load balancer
+Create instance 2 create load balancer create target group and all 
+Main process
+Go to the load balancer
+Select box
+Click action 
+Select edit attributes
+Access log enable
+S3 location s3://  -- tomrider-one	---- put uniq name to the s3 bucket
+Create this location for me		--- this click  imp 
+Then go to the S3 bucket 
+Refresh
+Now you see the bucket 
+And you see the logs of load balancer 
+If you want to see the logs then go to permission – unclick public acess – acl enable now – object go the folders click click click object action – make a public 
+Hit the link now you see the logs of the file 
+	

@@ -1,0 +1,74 @@
+process one but this process is costly use second method
+
+*********************1st method****************************
+
+step1.create vpc
+
+step2.Create Two Subnet
+      public-subnet
+      private-subnet
+      
+step3.create two Route table 
+      public-RT
+      private-RT
+
+step4. create IG then attach on VPC then route in public-RT & associate with public-subnet
+
+step5. create NAT then route in privateRT associate with private-subnet 
+
+step6.create 2 instances
+              public instance  (get Amazon-Linux 2023 image)  attach with public-subnet IP is enable
+              private instance  (get Amazon-Linux 2023 image)  attach with private-subnet IP is disable
+
+step7.Goto command promt
+      copy private instance key to public instance for ssh
+      scp -i <public instance-key> <private instance-key> ec2-user@public -instance-pub-ip:/tmp  #suppose any denied massage so use 400 or 600 permission 
+
+step6.Goto public instance 
+sudo -i
+cd /tmp 
+   #show your private instance key
+ssh -i private-key ec2-user@<private instance-ip>
+
+aws configure     #this user have s3fullaccess permission
+type root AWS access key
+type root aws secret key
+region 
+
+aws s3 ls     #show buckets
+aws s3 ls --region=us-west-2    # list of bucket perticuler region
+aws s3 ls s3://replica-bucket-2023 --recursive     #show list of bucket object with bucket name mention
+
+
+********************************************************************
+
+******************2nd Method****************************************
+
+Note :- This is very costly Nat Gatewat so we are communicate s3 service using VPC Endpoint 
+        So follow this steps
+
+step1. Firstly delete NAT and remove NAT from privateRT
+
+step2. create Role Ex.s3-access attach the policy s3fullaccess and attach private-instance
+
+step2.create endpoint
+     Name Ex. my-s3-endpoint
+     Service catagory  select AWS services
+     Services search "s3"
+     click on type link (us-west-2 your region)   com.amazonaws.us-west-2.s3  gateway select
+     select VPC
+     select private-Route table then create
+
+step3. Goto private route table 
+       show s3-endpoint 
+
+step4.Goto public instance 
+sudo -i
+cd /tmp 
+   #show your private instance key
+chmod 600 private-key
+ssh -i private-key ec2-user@<private instance-ip> 
+aws s3 ls     #show buckets
+aws s3 ls --region=us-west-2    # list of bucket perticuler region
+aws s3 ls s3://replica-bucket-2023 --recursive     #show list of bucket object with bucket name mention
+aws s3 cp example.txt s3://my-tomcat-project-b19/   #create file then upload into bucket

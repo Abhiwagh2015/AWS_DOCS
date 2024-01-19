@@ -1,0 +1,158 @@
+step 1. create Security Group with All traffic 0,0,0,0 Ex. my-SG same SG use in your practical
+
+step 1. create 3 ec2 instances with public IP also following userdata but changes you need like direcory cd /var/www/html/<home/laptop/mobile> and Data
+        Ex. Home-Instance
+        Ex. Laptop-Instance
+        Ex. Mobile-Instance
+
+Ex. Home-Instance
+#!/bin/bash
+sudo yum update
+sudo yum install httpd -y
+sudo echo "Welcome To Home" > /var/www/html/index.html
+systemctl start httpd
+systemctl enable httpd
+
+Ex. Laptop-Instance
+#!/bin/bash
+sudo yum update
+sudo yum install httpd -y
+sudo mkdir -p /var/www/html/laptop
+sudo echo "Welcome To Laptop Shopie" > /var/www/html/laptop/index.html
+systemctl start httpd
+systemctl enable httpd
+
+Ex. Mobile-Instance
+#!/bin/bash
+sudo yum update
+sudo yum install httpd -y
+sudo mkdir -p /var/www/html/laptop
+sudo echo "Welcome To mobile Shopie" > /var/www/html/mobile/index.html
+systemctl start httpd
+systemctl enable httpd
+
+******************************************************************************
+
+step 2. get ssh for instances and edit listener in conf. file
+
+Home-Instance
+vim  /etc/httpd/conf/httpd.conf 
+/80
+Listen 8000 and save
+systemctl restart httpd
+
+Laptop-Instance
+vim  /etc/httpd/conf/httpd.conf 
+/80
+Listen 8001 and save
+systemctl restart httpd
+
+Mobile-Instance
+vim  /etc/httpd/conf/httpd.conf 
+/80
+Listen 8002 and save
+systemctl restart httpd
+
+******************************************************************************
+
+step 3. Goto Incognito Window 
+
+paste your <Home-Instance-public-IP>:8000     #show your httpd page note a data show something then type /home
+paste your <Home-Instance-public-IP>:8000/home     #home is your home instance directory show on dir index.html data
+
+******************************************************************************
+
+step 4. Goto Target Group and create 3 Target Group for home, laptop, mobile
+
+create target group for Home-instance
+click create target group
+click on IP address target type
+type name "home"
+Select IPv4 address type
+same select vpc
+change Health Check path  type / then next
+click on"Advanced health check settings" 
+and Success code is change 200-400           #type on google and type "http status codes list" select first Mozilla tab and show status codes list informationse
+select home Instance
+change port and type 8000   #your listener in 8000 for Home-instance
+click on Includiing as pending below
+click on create target group
+
+create target group for Mobile-instance
+click create target group
+click on IP address target type
+type name "mobile"
+Select IPv4 address type
+same select vpc
+change Health Check path  type /mobile/ then next
+click on"Advanced health check settings" 
+and Success code is change 200-400           #type on google and type "http status codes list" select first Mozilla tab and show status codes list information
+select your mobile instance
+change port and type 8001   #your listener in 8001 for Mobile-instance
+click on Includiing as pending below
+click on create target group
+
+create target group for Laptop-instance
+click create target group
+click on IP address target type
+type name "laptop"
+Select IPv4 address type
+same select vpc
+change Health Check path  type /laptop/ then next
+click on"Advanced health check settings" 
+and Success code is change 200-400           #type on google and type "http status codes list" select first Mozilla tab and show status codes list information
+select your laptop instance
+change port and type 8002   #your listener in 8002 for laptop-instance
+click on Including as pending below
+click on create target group
+
+Note: check every target group status check is "healthy" and check health check path 
+
+******************************************************************************
+
+step 5. create Load balancer
+select Application Load Balancer
+type your load balancer name "My-ALB"
+Scheme select Internet-facing 
+select IP address type IPv4
+Network Mapping
+select same VPC
+select Availability zones you create your Instances and its subnet or get defaults subnet
+select your my-SG security group
+Add listener but used default HTTP:80 listener then select default Home target Group
+then create Load Balancer
+show load balancer in active state
+
+step 7. select you created load balancer
+
+**add 2st Listener rule
+click on HTTP:80 port
+then Goto manage rule select edit rule then click on add rule
+Name and tags like type laptop
+click on Add condition
+Rule condition types select "Path"
+type Path /laptop/* then click on confirm select path click on next
+in forword to target groups select TG laptop then next 
+priority set like 1
+then next and create
+
+**add 3st Listener rule
+click on HTTP:80 port
+then Goto manage rule select edit rule then click on add rule
+Name and tags like type mobile
+click on Add condition
+Rule condition types select "Path"
+type Path /mobile/* then click on confirm select path click on next
+in forword to target groups select TG mobile then next 
+priority set like 2
+then next and create
+
+step 8. click on HTTP:80 listener show in listener details then show Rule in Listener rule 
+
+step 9. copy loadbalancer DNS and paste it Google show Its works its mean your request is on your httpd service its cool
+        
+        on google loadbalancerDNS/home then Google show  "Wellcome to home"
+        on google loadbalancerDNS/laptop then Google show  "Wellcome to Laptop Shopie"
+        on google loadbalancerDNS/mobile then Google show  "Wellcome to Mobile shopie"
+
+Note :- suppose, hit the DNS then show Not Found Page its check listener rule

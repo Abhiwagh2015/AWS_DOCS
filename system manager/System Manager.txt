@@ -1,0 +1,36 @@
+System Manager 
+
+Steps
+
+First, create an IAM role
+Create role
+Select aws service :- select EC2 :- search:- amazonSSMManagedInstanceCore:- select : next 
+Role name:- SSM-role
+Create role
+Go to the EC2
+Launch multiple instance ex(10 instance)
+Launch simple instance 
+Select one by one instance :- action :- security :- modified iam role :- select role: update iam role 
+Go to the system manager
+Select :- session manager 
+Start session 
+Refresh target instance (5 min wait for the role to connect properly )
+Select the instance to start the session 
+Now you see the terminal 
+Check any packages available on Linux
+systemctl status httpd 		-- now you see could not be found (no package available in )
+Back to the system manager 
+Select run command:- run a command 
+Search :- shell : enter :- select :- aws-runshellScript 
+Now you see the command parameters 
+>#!/bin/bash
+>sudo yum install httpd -y
+Now you see the 3 options
+1 specify instance tags:- if agr 500 instance hai to instance k tags se ham select krenge instance ko
+2. choose instances manually:- now you see the all instances in this option and select on by one if you want which instance you select 
+3. choose a resource group:- if agr 50 instance hai to use group me create krke only group ko select krna hai 
+Run 
+Now you see the success 
+Go to the terminal 
+Now you see the httpd is there on then check first
+Systemctl status httpd 		- now you see the active inactive 

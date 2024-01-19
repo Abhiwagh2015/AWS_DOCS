@@ -1,0 +1,72 @@
+practical:- 
+
+cloudWatch Three stages
+1.In alarm
+2.Insufficient data 
+3.OK
+
+Moto: 
+
+step1:-create VPC
+         Click on "vpc"
+            select "flow logs"
+            click "create flow logs"
+            type name of flogs Ex. "my-vpc-flow-logs"
+            Destination choose "Send to CloudWatch Logs"
+            type Destination log group name Ex. "my-vpc-log-group"
+            IAM role "admin-access"
+            click "create flow log"
+
+step2:- create 2 EC2-instances
+        1st-instane name: 1st-instance
+                        create security-group: my-SG
+                        ports: ssh-http-ICMP-IPv-4
+        2nd-instance name: cpu-utilization
+                        create security-group: my-SG
+                        ports: ssh-http-ICMP-IPv-4
+
+step3: 1.connect for 1st instance
+       sudo -i
+       ping <public-ip> -l 4096
+           connect to the internet...
+       #return in instance click instance-id 
+            click "Monitoring"
+            check cpu-utilization
+
+       2.connect for 2st instance
+       sudo -i
+       sudo yum install stress -y
+       stress
+       stress --cpu 90 --io 4 --vm 2 --vm-bytes 128M --timeout 10m
+       w or uptime :- command through check the cpu utilization
+       top   (show jump chatrus created for increase cpu utilization)
+       #return in instance click instance-id 
+            click "Monitoring"
+            check cpu-utilization   :-(automatically increase cpu-utilization)
+
+step4:search "CloudWatch" service
+      1.click "Dashboards"
+          click "Create dashboard"
+          type Dashboard name  Ex. "my-dashboard" click "create dashboard"
+
+      2.click "add a first widget"        
+           select any widget type "but select line" click "next" select "Matrix"  click "Next"
+      3.In Matrics select "region you create instance"
+           Click on "EC2" click "Per-Instance Metrics"
+           Copy "cpu-utilization instance id" & paste it "in search tab"
+           Choose matrix Ex. "cpu-utilization" click "Create widget"
+           Click Custom and choose "Local time zone"
+       4.Suppose you have add new matrix Ex. "Network-In" follow same process
+       
+step5:share dashboard on internet link steps:
+       1.click on Action
+          click "start sharing"
+          type "Share"
+          click on "Confirm and previous policy"
+         click "Accept policy and generate shareable link"
+         copy link and paste on Google tab show your matrix 
+
+step6:Return to dashboard and delete dashboard
+
+Note :This is practical for cpu utilization how to show in cloudwatch
+Next practical is after increase CPU utilization instance is automatically stop

@@ -1,0 +1,31 @@
+1.create two instances in one availabillity zone
+     1.web-server 
+     2.ebs-demo     
+
+2.create new volume
+     name : new-volume, 10GB storage, Provisioned IOPS SSD (io1 & io2) volumes
+     Enable multiattach option
+     Note: Gp SSD (gp2),Gp SSD (gp3) is not show you create multiattach volume
+
+3.Goto Volume select new-volume
+  select we-server instance
+  Note : show this error  'vol-0a312231c1d0c1fb1' is multi-attach enabled and 't2.micro' does not support multi-attach enabled volumes.
+  
+4.Goto Instance and both of instance change instance-type
+   1. stop the instances
+       Actions -- Instance settings -- change instance type  t3-medium 
+      note :- this is have aws nitro instance type varius instance type use in multiattch instance type like t3-medium
+
+5. Goto volume and attach new volume both of instances
+
+6. goto volume check new-volume  (show attach two volume )
+
+7. connect ssh both of instances
+   lsblk
+   file -s /dev/nvme1n1
+         /dev/nvme1n1: data
+   mkdir /data
+   mkfs.ext4 /dev/nvme1n1
+   mount /dev/nvme1n1   /data
+   
+8.check on browse how to attach multi attach and which type of mkfs is used this is a task but same step are follow

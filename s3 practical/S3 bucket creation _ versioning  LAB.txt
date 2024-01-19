@@ -1,0 +1,120 @@
+S3 creation   (simple storage service)
+
+search s3
+
+select s3 - bucket --- if you have all ready bucket then you select 
+
+selct bucket name 
+
+go to the permiison 
+
+now Block public access (bucket settings)
+
+unclik all permiison 
+
+and save 
+
+now your file access is public then go to the 
+
+Bucket policy
+
+edit now 
+
+click policy exmple --- now you see the new tab scroll down and copy the format 
+
+Granting read-only permission to an anonymous user ---- this permission is used for public access the read only not create and delete 
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicRead",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": [
+                "s3:GetObject",
+                "s3:GetObjectVersion"
+            ],
+            "Resource": [
+                "arn:aws:s3:::DOC-EXAMPLE-BUCKET/*"
+            ]
+        }
+    ]
+}
+
+							DOC-EXAMPLE-BUCKET ----delete first and changes to the bucket name tomrider
+													tomrider is my bucket name 
+										
+
+--- if you have an error s3 bucket giving policies must be valid JSON and the first byte must be '{' 
+
+---- then the soluction is (you cant have these spaces _{ at the top ) first backspace is used first and then save 
+
+go to object
+
+click bucket name 
+
+click upload file when you uplod 
+
+now you see the link of file click now 
+
+https://resident-evil1.s3.ap-northeast-1.amazonaws.com/Screenshot+2022-09-03+191457.png  --- this type of link you see 
+
+now you see the deta on this file  
+
+if you want to delete bucket 
+
+first go to bucket
+
+then click box the bucket 
+
+now you have options delete and empty  --- if you direct delete the bucket you get a error of bucket is not empty
+
+first empty the bucket 
+ 
+then delete the bucket 
+
+varsining  							********
+
+first one create the bucket any name 
+
+put some data on this file and write the data 
+
+go to the public first 
+
+then go to the bucket 
+
+click bucket name 
+
+now go to properties 
+
+Bucket Versioning -- is enable first then 
+
+your default file keep deta enter on this file and upload 
+
+now check the data on this file 
+
+go the link copy and check 
+
+now you see the default data same and new data on this file 
+
+if you want to check the new data then go to the bucket
+
+bucket name object 
+
+show version  				----- now  you see the new file when you upload on this same deta on this same file 
+
+if a bucket file is delete then you want to restore the file then 
+
+first delete the file on the bucket 
+
+then you show empty the bucket 
+
+click show version 
+
+now you see the "delete marker" file 
+
+click delete this file 
+
+now you see the restore this file on this bucket 
+

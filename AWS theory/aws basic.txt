@@ -1,0 +1,59 @@
+AWS :- Basic (amazon web servie)
+
+
+cloud:- its a sharing of resorses form remote location your accessing this resources vie internate 
+	storege,server,network ya kisi bhi chiz ki zrurt hai to internate k through show krta hai 
+
+defination of cloud:-
+	cloud computing is the on-demand delivery of compute power, database, storage, appalications and other IT resources through
+	a cloud service from platform via the internet with pay-as-you-go model (without internet ham cloud ko access nhi kr skte)
+
+top companis in cloud
+
+1. AWS
+2. Microsoft Azure
+3. GCP
+4. Alibaba cloud
+5. oracle, Vmware, fuitsu, IBM
+
+charcterristic of cloud
+
+1. On demand self service	:- jab chahe ham apne network ko access kr skte hai kahi bhi apne service ko resource kr skte hai
+2. Broad network access	:- agr aapko network chahiye to ye provide krta hai
+3. scalability			:- network ko badhana hai ghatana hai to ham easily kr skte hai jaisi ki tin din k liye 30 server 
+						chahiye to ham le sakte hai or vapas 3 din bad return kr skte hai 
+4. Resource pooling		:- jite jrurt hai server and storage ki utne ham le skte hai or then return kr skte hai  
+5. Measured services		:- kitna trafic aayenga or kitne log visit krenge vo yaha show krenga
+
+
+AWS - 2006 me aya 
+
+amazon.com -2010 me shift hua
+
+certification - 2013 me certification hua
+
+Double profit - 2015,2016 double profit hua 
+
+re- invent -2018 
+
+
+>famous certification in aws
+
+AWS - solution architect - associate and professional level 
+
+AWS - devops - associate and professional level
+	   |
+	development+
+	operations	
+AWS - sysops - associate and professsion
+	   |	
+	system 
+	admine
+
+service models 
+
+IAAS - infrastructrue as a service
+PASS - paltform as a service
+SAAS - software as a service 
+
+how many types of hyperwiser 

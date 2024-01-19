@@ -1,0 +1,66 @@
+1.create two instances in one availabillity zone
+     1.web-server 
+     2.ebs-demo
+
+2.create new volume
+     name : new-volume, 5GB storage, General purpose GP2
+
+3. connect web-server instance
+      lsblk    #show block of storage with xvda block but not show xvdf block
+      df -h    #show size of block
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 4.Goto volume
+    click on volume goto actions and attach then select instance web-server
+    device name automatically show /dev/sdf but you have to change
+
+5.Goto instance web-server
+    lsblk   #show xvdf
+    df -h   #not show xvdf storage because of not available file system
+    file -s /dev/xvdf      #show filesystem have or not
+    /dev/xvdf: data    #suppose this massage is show no filesystem available
+    mkfs.ext4 /dev/xvdf    #this command through take a filesystem
+    file -s /dev/xvdf  
+        /dev/xvdf: Linux rev 1.0 ext4 filesystem data, UUID=94937119-1f50-40a2-80aa-4cff2d34a7c8 (extents) (64bit) (large files) (huge files)   #mean filesystem available
+          
+    lsblk
+    df -h    #no mount block but add filesystem
+    mkdir /data
+    mount /dev/xvdf  /data
+    df -h
+    resize2fs /dev/xvdf    #following massage is show
+       resize2fs 1.46.5 (30-Dec-2021)
+       The filesystem is already 1310720 (4k) blocks long.  Nothing to do!
+
+******************************************
+Extend root volume Ex. web-server instance  (This is for suppose ext4 as a filesystem )
+
+1. Goto volume 
+    select web-server volume click actions modify volume extend 5 to 10GB and save
+
+2. Goto web-server Instance & follow commands
+   lsblk    #show extend volume 
+   df -h    #but filesystem storage does not increase why follow command
+   growpart /dev/xvda 1
+      CHANGED: partition=1 start=227328 old: size=16549855 end=16777183 new: size=20744159 end=20971487
+   lsblk
+   df -h                    #again not change filesystem mount storage
+   resize2fs /dev/xvda1     #after that this command through change filesystem storage
+             resize2fs 1.46.5 (30-Dec-2021)
+             Filesystem at /dev/xvda1 is mounted on /; on-line resizing required
+             old_desc_blocks = 1, new_desc_blocks = 2
+             The filesystem on /dev/xvda1 is now 2593019 (4k) blocks long. 
+    df -h   #show extend storage
+
+*********************************************
+Extend root volume Ex. web-server instance  (This is for suppose xfs as a filesystem )
+
+1. file -s /dev/xvda1
+   xfs_growfs /dev/xvda1
+   df -h
+
+
+
+
+
+
+
+                                                                                                                                  

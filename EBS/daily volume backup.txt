@@ -1,0 +1,13 @@
+1. create volume     #add new tag for you create ebs volume
+
+2. click lifecycle manage  --- next
+   Note: This lifecycle use for Volume and AMIs
+   select volume  --- select tag you attach for volume -- next
+   frequency  --  daily
+   Every  --   2 hour
+   Retention   15
+   then click review policy and create policy
+
+
+output :- automatically get the snapshot after 2 hour for volumes you attach perticuler tag  
+    

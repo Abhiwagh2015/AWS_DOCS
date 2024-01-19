@@ -1,0 +1,65 @@
+service Model
+    IAAS
+    PAAS
+    SAAS
+cloud computing deployment module
+   private cloud
+   public cloud
+   Hybrid cloud
+   community cloud
+
+Iam 
+IAM component
+1. user 
+2. Group
+3. Policies
+4. Role
+
+Amazon Resource Names (ARNs) uniquely identify AWS resources.
+
+type of users
+1. AWS Management Console Access Users (use Username & password)
+2. Programatic Access Users
+   Username AcceSS key & secreet key recommended for AWS CLI, APIs, SDKs and others dev tool
+
+policy
+Identity based policy
+  1. set permission boundry
+  2. inline policy
+Resouce based policy
+  3. aws manage policy
+  4. custom (customer) manage policy
+
+
+role
+1. AWS Service link role
+2. role cross account access
+3. web Identity provider access
+4. service role
+5. faderated user Access
+
+1. AWS service role
+   Allow AWS service like EC2, lambda, or others to perform actions in this account
+2. AWS account
+   Allow entities in other AWS accounts belongings to you or a 3rd party to perform actions in this account
+3. 
+
+4. faderated user Access
+   allow users from one trusted entity to access resources or services in another trusted entity without the need for the user to have a separate set of 
+      credentials in each domain
+
+
+****************************
+using inline policy only stop the instance
+
+click on existing user
+   add permission
+   1. ec2readonlyacees 
+   2. click on inline policy
+         click ec2 
+         click on write then goto last  tick on "StopInstances" entity
+         Resources
+         you have two option 1. specific then add ARN like region-code and instance-id   #using specific instance specific zone stop the instance you should using s3 
+                                                                                          perticuler bucket entity specify put,get,delete,create,whatever
+                             2. all  #this mean any region any instance stop the perticuler user
+   click create policy

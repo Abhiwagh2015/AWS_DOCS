@@ -1,0 +1,49 @@
+Note: 
+
+A virtual private cloud (VPC) is a virtual network dedicated to your AWS account. It is logically isolated from other virtual networks in the AWS Cloud. 
+You can launch AWS resources, such as Amazon EC2 instances, into your VPC.
+
+A VPC peering connection is a networking connection between two VPCs that enables you to route traffic between them using private IPv4 addresses or IPv6 addresses. 
+Instances in either VPC can communicate with each other as if they are within the same network. You can create a VPC peering connection between your own VPCs, 
+or with a VPC in another AWS account. The VPCs can be in different Regions (also known as an inter-Region VPC peering connection).
+
+*************************************************************************************************
+
+create 2 vpc
+
+   VPC-A CIDR Ex. 10.0.0.0/18 with VPC-A-subnet subnet 10.0.0.0/24 with create VPC-A-IG and attach VPC-A create VPC-A-RT attach IG with associate VPC-A-subnet
+   VPC-B CIDR Ex. 192.168.0.0/20 with VPC-B-subnet subnet 192.168.0.0/24 with create VPC-B-IG and attach VPC-A create VPC-B-RT attach IG with associate VPC-B-subnet
+
+*************************************************************************************************
+
+create 2 security group for with ports (22,ALL ICMP IPV4 with 0.0.0.0/0 destination) 
+         VPC-A-SG
+         VPC-B-SG
+
+*************************************************************************************************
+
+create 2 ec2-servers in diffirent 2 VPC with any AMI also enable public IP connect ssh
+
+*************************************************************************************************
+
+create peering connection
+ type name Ex. my-vpc-peering
+ VPC ID requester 
+      select VPC-B
+ VPC ID accepter(same region)
+      select VPC-B
+ create peering connection then GoTo Actions click on accept request 
+
+*************************************************************************************************
+
+Goto both of servers then ping private Ip opposite servers
+  show packets loss error
+
+then go to VPC-A-RT route the traffic select one add route then add peering connection like my-vpc-peering and in destination type VPC-B-subnet ip with CIDR 192.168.0.0/24 
+ 
+then go to VPC-B-RT route the traffic select one add route then add peering connection like my-vpc-peering and in destination type VPC-A-subnet ip with CIDR 10.0.0.0/24 
+ 
+*************************************************************************************************
+
+Goto both of servers then ping private Ip opposite servers
+  this time ping the ips

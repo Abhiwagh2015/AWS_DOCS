@@ -1,0 +1,62 @@
+vpc (virtual private cloud)
+
+default vpc 172.31.0.0/16
+default subnet 172.31.0.0/20
+
+1 vpc (default create componants [SG,NACL,route table,DHCP])
+2 subnet (private subnet public subnet)
+3 route tables (private RT public RT)
+4 Internet gateway
+5 NAT
+6 security group (vpc specific)
+7 endpoint
+8 VPN (virtual private network)
+9 peering connections (only 2 vpc's)
+10 alternative (Transite Gateway)
+
+5 ip's reserved 
+0.0/24 , the following five IP addresses are reserved:
+0.0: Network address.
+0.1: Reserved by AWS for the VPC router.
+0.2: Reserved by AWS. The IP address of the DNS server is the base of the VPC network range plus two. ...
+0.3: Reserved by AWS for future use.
+0.255: Network broadcast address
+
+CIDR (classless inter domain routing)
+10.0.0.0/16  to /28 
+ipv'4 32 bit 4 octet
+
+1. 10.0.0.0/16  256(network) 65536 (Host)
+
+1  65536-5  65531(usable host)
+2  65536
+3  65536
+.  65536
+.  65536
+256    65536
+
+2. 172.31.0.0/22
+
+17  2'1 = 2  256/2 = 128(network) 15 host   host 65536/2 = 32768-5 32763(usable host)  0+255=256  
+18  2'2 = 4  256/4 = 64           14 host host 32768/2 = 16384
+19  2'3 = 8  256/8 = 32           13 host host 16384/2 = 8192
+20  2'4 = 16  256/16 = 16         12 host host 8192/2  = 4096-5 4091
+21  2'5 = 32  256/32 = 8          11 host host 4096/2  = 2048
+22  2'6 = 64  256/64 = 4          10 host host 2048/2  = 1024
+23  2'7 = 128  256/128 = 2        9  host host 1024/2  = 512
+24  2'8 = 256  256/256 = 1        8  host host 512/2   = 256
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

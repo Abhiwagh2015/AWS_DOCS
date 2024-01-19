@@ -1,0 +1,76 @@
+Static web hositing 
+
+go to the firefox
+
+search free css 
+
+now select the page and download 
+
+now you see the download file first one extract the file then 
+
+upload first go the extract file and upload all 
+
+go to object 
+
+now you see the index.html
+
+copy url  ---- and paste other tab now you see the error access denide 
+
+go to properties *
+
+Static website hosting   ---edit now 
+
+Enable now 
+
+index.html
+
+error.html
+
+save changes 
+
+go to permission *
+
+Block public access (bucket settings) *
+
+edit untick all block access 
+
+and save changes
+
+Object Ownership
+
+Edit now 
+
+Acl Enabled  --- and save changes 
+
+go to the 
+
+Access control list (ACL) *
+
+Edit 
+
+Everyone (public access) 		list 		read 			---- click now make a public 
+
+everytime block select 
+
+now go to the object ---- bcoz public now then the url is access
+
+select name all select --- 
+
+go to action 
+
+make public using ACL
+
+make public  ----- now successful 
+
+go the url 
+
+go to the object 
+
+click index.html 
+
+click copy link 
+
+and paste other tab
+
+now you see the website is host 
+

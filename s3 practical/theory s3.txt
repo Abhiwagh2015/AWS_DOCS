@@ -1,0 +1,77 @@
+=> AWS Storage refers to the range of scalable and durable cloud-based storage solutions offered by Amazon Web Services (AWS). 
+   It provides businesses and individuals with the ability to store and retrieve their data securely and efficiently in the cloud. 
+
+=> storage limit in for account provide by AWS
+1. Free Tier Accounts
+   Storage limit is 5 GB.
+2. Pay-As-You-Go Accounts (General Accounts)
+   Defaullts limit can be create up to 100 buckets per region each bucket can store 5TB data. you can increase your account bucket quota to a maximum of 1,000 buckets 
+   by submitting a quota increase request. 
+   Individual Amazon S3 objects can range in size from a minimum of 0 bytes to a maximum of 5 TB. The largest object that can be uploaded in a single PUT is 5 GB.
+
+=> Diffirent type of Storages provides by AWS
+
+AWS Storage includes services such as :- 
+
+1. Amazon S3 (Simple Storage Service) for object level storage, 
+2. Amazon EBS (Elastic Block Store)  :- EBS provide block level storage volume that can be attach ec2 instance, 
+3. Amazon EFS (Elastic File System) for file storage :- EFS provide common storage that can be attach number of ec2 instance,
+4. Amazon FSx (File System) :- FSx provide full manage file system optimized for specific workload, Ex. which provide by windows based applications.
+5. Amazon Glacier :can tolarate for long-term retrival or archival storage provide by aws is a service. 
+6. Amazon s3 Glacier :- Amazon s3 Glacier is a storage class within amazon s3.	
+
+These services offer different features and capabilities to meet various storage needs, such as high-performance storage, backup and restore, 
+data archiving, and content distribution.
+
+=> Use Cases (application of storage)
+
+1. Backup and Restore
+2. Disaster Recovery (DR)
+3. Archive    #An archive is a collection of historical documents or records that are preserved for historical, cultural, research, or reference purposes. Archives 
+              can take various forms and include a wide range of materials, Ex. Archives often contain old manuscripts, letters, diaries, legal documents, government records, and other written materials.
+4. data lakes and Big data Analytics
+5. Hybrid Cloud storage  #Hybrid cloud storage is a cloud computing model that combines the use of both on-premises (private cloud) and public cloud storage resources to create a unified storage environment
+6. Cloud Native Apllications  (cloud par hi chalane wale applications)
+
+=> S3 Definition
+    Provide objects storage which is built for storing and recovering any amount of data from anywhere over the internet.
+
+> s3 is a object based storage service that offers indusutry leading scalability, data availability, security and performance.
+> Industry that can be stored and protect any ammount of data
+   Ex. Data lakes (pulling), WebSites, Mobiles applications, backup and restore archieve enterprise applications, 
+   IoT devicess (Internet of Things > Sensors, smart TV, smart city Infrastructure, smart speckers, robots, home security system, smart door lock.)
+
+=>Benifits
+
+1. Durability  (99.999999999%, 11 9s of data durability) (we have stored the data is fixed on certain ammount of time data it won't get loss it wiil be their is fixed)  
+2. Availability (99.99%)
+3. Cost effective
+4. Scalability
+5. security  Ex. Data Encryptions  (To protect data   when its being Trasmitted and also when at REST) doen not pattern opzopt unauthorized access
+6. Object :- object mean consist of Data + Metadata
+
+=> Amazon Features 
+
+1. Storage Classes
+2. Bucket Policies
+3. Versioning
+4. Static Website Hosting
+5. Encryptions  (Server-side & client-side ) (To protect data when its being Trasmitted and also when at REST)
+6. Transfer Accelarations   #transfer acceleration is a feature that allows you to speed up transferring files to and from your S3 buckets by using Amazon CloudFront's 
+                             globally distributed edge locations. This feature can be especially helpful when you need to transfer large amounts of data over the internet.
+7. Object Lock
+8. Cross Region replications
+9. Life Cycle Rule
+
+=> Storage Classes
+
+Amazon s3 offers a range of storage classess design for diffirent use cases.
+
+1. s3 standard 
+2. s3 Intelligent-Tiering
+3. s3 standard-IA
+4. s3 One Zone-IA
+5. Reduced Redundancy Storage
+6. Glacier
+7. Glacier Deep Archive
+ 

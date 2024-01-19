@@ -1,0 +1,21 @@
+1. You have there are two Region Mumbai and Virginia
+
+2. you have in mumbai region 
+   create volume and get this snapshot
+
+3. select snapshot Goto actions select copy snapshot 
+    select region us-east-1(north-virginia)  -- copy
+
+4.Goto us-east-1(north-virginia) region
+  click on snapshot
+  this snapshot through create volume and this volume attach your server machine & go inside
+   lsblk   #show xvdf
+   df -h   #not show xvdf storage because of not available file system
+   file -s /dev/xvdf  
+        /dev/xvdf: Linux rev 1.0 ext4 filesystem data, UUID=94937119-1f50-40a2-80aa-4cff2d34a7c8 (extents) (64bit) (large files) (huge files)   #mean filesystem available
+          
+    df -h    #no mount block but add filesystem
+    mkdir /data
+    mount /dev/xvdf  /data 
+    cd /data
+    ls    #show your data

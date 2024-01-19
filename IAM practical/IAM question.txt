@@ -1,0 +1,24 @@
+IAM Questions
+What is Linux?
+Why does the org use Linux?
+Why we are using the cloud?
+What is cloud?
+Why cloud?
+Features/benefits of Cloud ?
+What is the Working model of cloud computing?
+Type of services in cloud?
+AWS global infrastructure
+Diff b/w region and AZ?
+What is edge location?
+What is Low latency?
+Difference b/w global and region-specific services?
+Type of users in AWS?
+What is IAM service? features of IAM?
+What type of access we can provide to the user?
+Explain groups in IAM service?
+Explain policy and its types?
+Explain the detailed use of roles?
+diff b/w Authentication and authorization?
+diff b/w access key and secret access key?
+What is ARN in aws? explain its field?
+what is MFA and its use?

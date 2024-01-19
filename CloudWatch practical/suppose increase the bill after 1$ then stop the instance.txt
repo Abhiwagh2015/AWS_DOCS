@@ -1,0 +1,12 @@
+step 1. create EC2-instances
+
+step 2. click your account 
+        select "Billing Dashboard"
+        select "Billing preferences"
+        In Alert preferences "Edit" type additional email Address "sagar.sonule001@gmail.com"
+        received cloudwatch billing alert tag and "update"
+
+step 3. Search "cloudWatch Service"
+        Select "In alarm" click "create alarm"
+        click select matrix   
+   

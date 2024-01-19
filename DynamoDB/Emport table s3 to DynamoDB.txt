@@ -1,0 +1,9 @@
+Note :- First of all upload ProductCatalog.json to s3 bucket 
+
+Goto DynamoDB console
+ click on Import to s3
+    select bucket source address 
+    import file form at DynamoDB json 
+    Table name :- ProductCatalog
+    partition-key   Id     (number)
+    create table 

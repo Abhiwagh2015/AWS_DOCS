@@ -1,0 +1,126 @@
+Cross region vpc
+
+choose first region 	(Tokyo)
+Go to the vpc
+Your vpc 
+Create Vpc 		 
+Name :- VPC-tokyo
+ IPV4 CIDR :-10.0.0.0/20					*****imp ip*****
+Save
+
+Create Subnet				
+Select :-Subnet-tokyo
+Availablity zone:- select 1a
+10.0.15.255/20
+Create subnet
+
+Create internet getway		
+Name;-VPC-IG-tokyo
+Create internet getway
+Select VPC-IG-tokyo : select action :- select VPC-tokyo
+Attach internet gateway
+
+Select route tables
+Create route table 		Select 
+Name:- VPC-RT-tokyo
+Select :- VPC-RT-tokyo
+Create route table 
+Edits routes
+Add route :-0.0.0.0/0 		select Internet getway 		Save Changes
+Select subnet association 
+Edit Select subnet association 
+Select Subnet-tokyo	save association
+
+****************************************************
+
+choose first region 	(Mumbai)
+Go to the vpc
+Your vpcs 
+Create Vpc 		 
+Name :- VPC-mumbai
+ IPV4 CIDR :-20.0.0.0/21					*****imp ip*****
+Save
+
+Create Subnet				
+Select :-Subnet-mumbai
+Availablity zone:- select 1a
+21.0.7.255/21
+Create subnet
+
+Create internet getway		
+Name;-VPC-IG-mumbai
+Create internet getway
+Select VPC-IG-mumbai : select action :- select VPC-A
+Attach internet gateway
+Select route tables attach IG
+
+Create route table 		Select 
+Name:- VPC-RT-mumbai
+Select :- VPC-RT-mumbai
+
+Create route table 
+Edits routes
+Add route :-0.0.0.0/0 		select Internet getway 		Save Changes
+Select subnet association 
+Edit Select subnet association 
+
+-------------------------------------------
+
+Select Subnet-mumbai		save association
+Go to EC2 
+Launch instance 			Mumbai
+Name:- Mumbai-instance
+Ami
+T2 micro 
+Key name:- newkey
+Network setting:- select vpc :- VPC-mumbai	Auto-assign public ip:- Enable 
+Create security group 
+Add security group rule  :- ALL ICMP-IPV4 	source:- Anywhere
+Launch 	
+Go to the Tokyo region 
+Go to EC2 
+
+--------------------------------------------
+
+Launch instance 			Tykyo
+Name:- tykyo-instance
+Ami
+T2 micro 
+Key name:- newkey
+Network setting:- select vpc :- VPC-Tokyo	Auto-assign public ip:- Enable 
+Create security group 
+Add security group rule  :- ALL ICMP-IPV4 	source:- Anywhere
+Launch
+
+
+*********************************************
+
+Create peering connection 			Tokyo
+Name:- my-peering 
+VPC-ID (Requester) 
+Select-tykyo
+Select 
+Another Region 
+Select Mumbai 
+VPC-id : vpc-0015ca881682d70f1		this is vpc id of Mumbai region 
+Create peering 
+Now go to the Mumbai region 
+Select peering connection 
+Now you see the my peering 
+Select : select action : accept request 
+Select route connection 			Tokyo
+Select VPC-RT-tokyo
+Edit route 
+20.0.0.0/21			copy main Mumbai region vpc subnet imp subnet
+Save route
+
+Go to the Mumbai
+Select route connection 			mumbai
+Select VPC-RT-tokyo
+Edit route 
+10.0.0.0/20			copy main Mumbai region vpc subnet imp subnet
+Save route
+Now any instance connect and ping another region privet ip 
+Ex Mumbai region connect 
+Ping 198.162.13.135			this is privet ip of Tokyo-instance (Tokyo region)
+Now you see the connect 

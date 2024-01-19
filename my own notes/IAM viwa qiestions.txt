@@ -1,0 +1,32 @@
+IAM viva questions and answers
+
+1.	What is IAM and how does it work in AWS?
+2.	What are the different types of IAM entities in AWS?
+3.	How do you create an IAM user in AWS?
+4.	What are access keys and secret key, how is gain and how are they used in IAM?
+5.	What is the purpose of IAM policies?
+6.	How do you create and attach an IAM policy to an IAM entity?
+7.	How do you control access to AWS resources using IAM?
+8.	What is the difference between identity-based policies and resource-based policies in IAM?
+9.	How do you set up multi-factor authentication (MFA) for IAM users?
+10.	What is IAM role and how it differs from an IAM user?
+11.	What is IAM federation and how is it used?
+12.	What is IAM Access Analyzer and how is it used to improve security?
+13.	How do you manage and monitor IAM activity and events?
+14.	What are the best practices for IAM security in AWS?
+15.	Can you explain how IAM integrates with other AWS services such as S3, EC2, and RDS?
+16.	How does IAM help organizations achieve compliance with regulatory requirements?
+17.	Can you explain the concept of IAM roles and how they are used in AWS?
+18.	How do you use IAM to control access to AWS APIs and services?
+19.	What is IAM policy evaluation logic and how does it work?
+20.	How do you use IAM to enable cross-account access to AWS resources?
+21.	What is AWS Single Sign-On (SSO) and how does it work with IAM?
+22.	What is IAM Access Analyzer and how does it help identify security risks?
+23.	What are the different authentication methods supported by IAM?
+24.	How do you use IAM to enable temporary access to AWS resources?
+25.	What are the key benefits of using IAM in AWS?
+26.	How do you use IAM to enable programmatic access to AWS resources?
+27.	Can you explain how IAM policies can be used to grant permissions to users and groups?
+28.	What are the different types of IAM policies and when should each be used?
+29.	How do you use IAM to manage access to AWS resources across multiple accounts?
+30.	How do you use IAM to enable role-based access control (RBAC) in AWS?

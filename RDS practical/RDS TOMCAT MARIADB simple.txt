@@ -1,0 +1,88 @@
+#use same vpc and security group for rds and instance
+
+1. create vpc 
+   create vpc -> vpc-one 10.0.0.0/16
+2. create subnet ->  1.public-subnet 10.0.1.0/24   2.private-subnet 10.0.2.0/24
+3. create route -> subnet association (attach both pub and priv subnets)
+
+4. create internet gateway igw -> edit on rute table
+
+
+5. create rds 
+  a. service -> rds -> databases -> create database
+  b. standard create -> mariadb
+  c. template -> free tier 
+  d. Master username : admin
+  e. Master password : Admin$123
+  f. Virtual private cloud (VPC) : same vpc attach 
+  g. VPC security group (firewall) -> create new security group with (http 80, mysql/aurora 3306 ,custom tcp 8080, ssh 22) attch same to instance
+  h. Additional configuration -> Database options : studentapp
+
+*add below ports after create instance -> click on database -> click on Security VPC security groups -> inbound rule
+ 
+http 80
+mysql/aurora 3306
+custom tcp 8080
+ssh 22
+
+6. create instance
+   a. attcah same vpc 
+   b. subnet : public-subnet
+   c. Auto-assign public IP : enable
+   d. security group : same
+
+7. connect instance
+   a. sudo yum update -y
+   b. sudo yum install mariadb -y
+      systemctl start mariadb
+      systemctl enable mariadb
+   c. mysql -h <database-rds-endpoint> -u admin -p
+   e. CREATE DATABASE studentapp;
+   f. use studentapp;
+   g. run the table making script
+CREATE TABLE if not exists students(student_id INT NOT NULL AUTO_INCREMENT,
+	student_name VARCHAR(100) NOT NULL,
+    student_addr VARCHAR(100) NOT NULL,
+	student_age VARCHAR(3) NOT NULL,
+	student_qual VARCHAR(20) NOT NULL,
+	student_percent VARCHAR(10) NOT NULL,
+	student_year_passed VARCHAR(10) NOT NULL,
+	PRIMARY KEY (student_id)
+);
+describe students;
+exit 
+
+8. install tomcat only from below link (no updated version will work on with this project)
+cd /mnt
+#!//bin/bash
+sudo yum update -y
+sudo yum install java-1.8.0-amazon-corretto-devel -y  or yum install java* -y
+cd /mnt
+sudo wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.84/bin/apache-tomcat-8.5.84.zip
+sudo unzip apache-tomcat-8.5.84.zip
+cd ./apache-tomcat-8.5.84/
+sudo chmod +x ./bin/*
+cd ./bin
+echo $PWD
+sudo ./catalina.sh start
+sudo wget https://s3-us-west-2.amazonaws.com/studentapi-cit/student.war
+sudo mv student.war /mnt/apache-tomcat-8.5.84/webapps/
+
+9. cd conf
+   sudo vim context.xml
+        at line no.21->  exact below <Context>
+        <Resource name="jdbc/TestDB" auth="Container" type="javax.sql.DataSource"
+                           maxTotal="500" maxIdle="30" maxWaitMillis="1000"
+                           username="admin" password="Admin$123" driverClassName="com.mysql.jdbc.Driver"
+                           url="jdbc:mysql://database-1.cl77p3lwlrcp.us-east-1.rds.amazonaws.com:3306/studentapp"/>
+
+10  cd /mnt/apache-tomcat-8.5.83/bin/
+    ./catalina.sh stop
+    ./catalina.sh start
+
+11. hit public IP in browser with :8080/student
+    a. fill the dada and ragister it will be save in rds database.
+
+12. now you can  check in mysql databases.
+ 
+
